@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Help U</string>
+    <string name="menu_home">홈</string>
+    <string name="menu_map">센터찾기</string>
+    <string name="menu_community">커뮤니티</string>
+    <string name="menu_profile">프로필</string>
+</resources>
