@@ -21,6 +21,15 @@
             android:name=".Community"
             android:exported="false" />
         <activity
+            android:name=".Write"
+            android:exported="false" />
+        <activity
+            android:name=".Custom"
+            android:exported="false" />
+        <activity
+            android:name=".Change"
+            android:exported="false" />
+        <activity
             android:name=".Map"
             android:exported="false" /> <!-- android:theme="@style/Theme.HelpU"> -->
         <activity

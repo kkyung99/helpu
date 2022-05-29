@@ -4,19 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Community">
 
     <include layout="@layout/activity_base"/>
-
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:layout_marginTop="70dp"
+        app:iconifiedByDefault="true"
+        app:queryHint="검색어를 입력하시오" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fillViewport="true"
+        android:layout_marginTop="0dp">
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp">
+        </ListView>
+    </ScrollView>
     <TextView
+        android:id="@+id/receiveText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"/>
+    <TextView
+        android:id="@+id/receiveText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"/>
+    <android.widget.Button
+        android:id="@+id/button_write"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/menu_community"
-        android:textSize="50dp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"
-        android:textColor="@color/black" />
-
+        android:layout_marginTop="600dp"
+        android:layout_marginLeft="270dp"
+        android:text="글쓰기"
+        android:textSize="15dp"
+        android:background="@drawable/button"/>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigator"
         android:layout_width="match_parent"
