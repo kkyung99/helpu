@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Change extends AppCompatActivity {
-    Button btn_save; //저장
+    Button btn_save;//저장
     EditText editTitle;
     //ImageView img;
     EditText editContent;

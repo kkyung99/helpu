@@ -1,23 +1,13 @@
 package com.example.helpu;
 
-import androidx.annotation.ContentView;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -64,14 +54,14 @@ public class ListViewAdapter extends BaseAdapter{
 
                 Drawable drawable; // 대리자를 선언합니다
 
-                if (flg[0]==true) { // green 상태면?
+                if (flg[0]==true) {
 
-                    flg[0] = false; // red 로 설정합니다​
-                    drawable = context.getResources().getDrawable(R.drawable.unlike);
+                    flg[0] = false;
+                    drawable = context.getResources().getDrawable(R.drawable.unlike1);
                 }
                 else{
-                    flg[0] = true; // green 으로 설정합니다​
-                    drawable = context.getResources().getDrawable(R.drawable.like);
+                    flg[0] = true;
+                    drawable = context.getResources().getDrawable(R.drawable.like1);
                 }
                 imageView[0].setImageDrawable(drawable); // 이미지를 적용합니다
             }

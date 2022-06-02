@@ -107,7 +107,7 @@ public class Write extends Activity {
             Cursor cursor = getContentResolver().query(Uri.parse(selectedImage.toString()), null, null, null, null);
             assert cursor != null;
             cursor.moveToFirst();
-            Object mediaPath = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
+            Object mediaPath = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA)); //왜 오류가나니..?
             Log.d("경로 확인 >> ", "$selectedImg  /  $absolutePath");
 
         }else{

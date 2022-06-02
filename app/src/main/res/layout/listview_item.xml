@@ -60,7 +60,7 @@
             android:layout_height="100dp"
             android:layout_marginHorizontal="135dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/unlike"/>
+            android:src="@drawable/unlike1"/>
     </LinearLayout>
     <!--    <Button-->
     <!--        android:id="@+id/delete"-->

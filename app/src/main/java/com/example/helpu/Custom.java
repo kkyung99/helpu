@@ -51,7 +51,7 @@ public class Custom extends AppCompatActivity{
         //String text = intent.getExtras().getString("POSITION");
         //textView.setText(text);
 
-        //댓글 등록
+        //댓글등록
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public  void onClick(View v){

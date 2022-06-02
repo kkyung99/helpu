@@ -43,7 +43,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.w3c.dom.Text;
 
 public class Community extends AppCompatActivity {
-    Button btn_write; //글쓰기버튼
+    Button btn_write;
     private ListView listview;
     private ListViewAdapter adapter;
     TextView receiveView;
