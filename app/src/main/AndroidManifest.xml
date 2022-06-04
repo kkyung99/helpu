@@ -13,7 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:requestLegacyExternalStorage="true">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCrz4_lZtK5WMCBoitih3L35jF0pATxX4E" />
@@ -25,6 +26,15 @@
             android:exported="false" />
         <activity
             android:name=".Community"
+            android:exported="false" />
+        <activity
+            android:name=".Write"
+            android:exported="false" />
+        <activity
+            android:name=".Custom"
+            android:exported="false" />
+        <activity
+            android:name=".Change"
             android:exported="false" />
         <activity
             android:name=".Map"
