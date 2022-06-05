@@ -1,39 +1,35 @@
 package com.example.helpu;
+
+import static com.example.helpu.LoginActivity.TAG;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
-import java.io.File;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Write extends Activity {
     Button btn_write;//저장
@@ -41,6 +37,8 @@ public class Write extends Activity {
     EditText txt_write2;//본문
     ImageView imageView;
     public static final int REQUEST_CODE = 1000;
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +48,6 @@ public class Write extends Activity {
         imageView = findViewById(R.id.select_image); //이미지선택
         txt_write = (EditText) findViewById(R.id.title_name); //제목
         txt_write2 = (EditText) findViewById(R.id.content); //본문
-
 
         //저장버튼
         btn_write.setOnClickListener(new View.OnClickListener() {
@@ -62,11 +59,39 @@ public class Write extends Activity {
                 Intent intent = new Intent(Write.this, Community.class);
 //                intent.putExtra("title",txt_write.getText().toString());
 //                intent.putExtra("content",txt_write2.getText().toString());
-                ListViewItem item = new ListViewItem();
-                item.setTitle(txt_write.getText().toString());
-                item.setContent(txt_write2.getText().toString());
-                item.setIcon(imageView.getImageAlpha());
-                Community.testList.add(item);
+
+//                ListViewItem item = new ListViewItem();
+//                item.setTitle(txt_write.getText().toString());
+//                item.setContent(txt_write2.getText().toString());
+//                item.setIcon(imageView.getImageAlpha());
+//                Community.testList.add(item);
+
+                String title = txt_write.getText().toString();
+                String content = txt_write2.getText().toString();
+
+                Map<String, Object> post = new HashMap<>();
+                post.put("title", title);
+                post.put("content", content);
+                post.put("uid", auth.getCurrentUser().getUid());
+                post.put("timeStamp", FieldValue.serverTimestamp());
+
+                db.collection("communityPosts").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        //데이터가 성공적으로 추가되었을 때
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //에러가 발생했을 때
+                        Log.w(TAG, "Error ", e);
+                    }
+                });
+
+
+
+
                 startActivity(intent);
                 //finish();
             }

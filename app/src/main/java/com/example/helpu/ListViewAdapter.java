@@ -37,7 +37,7 @@ public class ListViewAdapter extends BaseAdapter{
             convertView = inflater.inflate(R.layout.listview_item,parent,false);
         }
         titleTextView = (TextView) convertView.findViewById(R.id.title);
-        iconImageView = (ImageView) convertView.findViewById(R.id.icon);
+//        iconImageView = (ImageView) convertView.findViewById(R.id.icon);
         contentTextView =(TextView) convertView.findViewById(R.id.content);
         ListViewItem listViewItem = listViewItemList.get(position);
 
@@ -66,32 +66,6 @@ public class ListViewAdapter extends BaseAdapter{
                 imageView[0].setImageDrawable(drawable); // 이미지를 적용합니다
             }
         });
-
-        //Button button = (Button)convertView.findViewById(R.id.delete);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                int count, checked;
-////                count = listViewItemList.size();
-////                if(count > 0){
-////                    checked = listView.getCheckedItemPosition();
-////                    if(checked>-1 && checked<count){
-////                        listViewItemList.remove(checked);
-////                        listView.clearChoices();
-////                        adapter.notifyDataSetChanged();
-////                    }
-////                }
-//                Toast.makeText(v.getContext(),listViewItem.getContent(),Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        Button button1 = (Button)convertView.findViewById(R.id.details);
-//        button1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(v.getContext(),listViewItem.getContent(),Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
 
         return convertView;
     }

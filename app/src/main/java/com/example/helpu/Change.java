@@ -14,7 +14,6 @@ public class Change extends AppCompatActivity {
     //ImageView img;
     EditText editContent;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

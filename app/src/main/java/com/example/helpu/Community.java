@@ -13,7 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -26,6 +31,7 @@ public class Community extends AppCompatActivity {
     SearchView search_view;
     //파이어베이스
     public static ArrayList<ListViewItem> testList = new ArrayList<ListViewItem>();
+    private static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     BottomNavigationView bottomNavigationView;
 
@@ -33,6 +39,23 @@ public class Community extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community);
+
+        db.collection("communityPosts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                //작업이 성공적으로 마쳤을때
+                if (task.isSuccessful()) {
+                    //컬렉션 아래에 있는 모든 정보를 가져온다.
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        //document.getData() or document.getId() 등등 여러 방법으로
+                        //데이터를 가져올 수 있다.
+                    }
+                    //그렇지 않을때
+                } else {
+
+                }
+            }
+        });
 
         adapter = new ListViewAdapter();
 
