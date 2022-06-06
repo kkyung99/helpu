@@ -33,6 +33,7 @@ import java.util.Map;
 
 public class Write extends Activity {
     Button btn_write;//저장
+    ImageView btn_back;
     EditText txt_write;//제목
     EditText txt_write2;//본문
     ImageView imageView;
@@ -45,9 +46,19 @@ public class Write extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
         btn_write = findViewById(R.id.button_write); //저장버튼
+        btn_back = findViewById(R.id.btn_back);
         imageView = findViewById(R.id.select_image); //이미지선택
         txt_write = (EditText) findViewById(R.id.title_name); //제목
         txt_write2 = (EditText) findViewById(R.id.content); //본문
+
+        //뒤로
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Community.class);
+                startActivity(intent);
+            }
+        });
 
         //저장버튼
         btn_write.setOnClickListener(new View.OnClickListener() {

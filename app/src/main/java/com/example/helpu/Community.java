@@ -26,15 +26,12 @@ import java.util.ArrayList;
 
 public class Community extends AppCompatActivity {
     ImageView btn_write;
+    ImageView btn_back;
     private ListView listview;
     private ListViewAdapter adapter;
-    TextView receiveView;
-    TextView receiveView2;
     SearchView search_view;
-    //파이어베이스
     public static ArrayList<ListViewItem> testList = new ArrayList<ListViewItem>();
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     BottomNavigationView bottomNavigationView;
 
     @Override
@@ -47,10 +44,9 @@ public class Community extends AppCompatActivity {
 
         listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter);
-        //listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         testList.clear();
         db.collection("communityPosts").orderBy("timeStamp", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            //order by해서 최근시간부터 나오도록 정렬해줌
+            //orderBy로 최근시간부터 나오도록 정렬
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 //작업이 성공적으로 마쳤을때
@@ -59,15 +55,16 @@ public class Community extends AppCompatActivity {
                     //컬렉션 아래에 있는 모든 정보를 가져온다.
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         System.out.println(document.getData());
+                        //doucument 결과를 어뎁터에 저장
                         adapter.addItem(document.get("title").toString(), R.drawable.login_logo, document.get("content").toString());
                         adapter.notifyDataSetChanged();
-                        ListViewItem listviewData = new ListViewItem();
-                        listviewData.setUidStr(document.get("uid").toString());
-                        listviewData.setIdStr(document.getId());
-                        listviewData.setTitle(document.get("title").toString());
-                        listviewData.setIcon(R.drawable.login_logo);
-                        listviewData.setContent(document.get("content").toString());
-                        testList.add(listviewData);
+                        ListViewItem listviewData = new ListViewItem(); //listviewData객체 생성
+                        listviewData.setUidStr(document.get("uid").toString()); //수정페이지에서 uid값을 사용하기 위해
+                        listviewData.setIdStr(document.getId()); //고정id값 저장
+                        listviewData.setTitle(document.get("title").toString()); //제목
+                        listviewData.setIcon(R.drawable.login_logo);//이미지
+                        listviewData.setContent(document.get("content").toString());//내용
+                        testList.add(listviewData);//listviewData를 testlist배열안에 저장해준다. 그럼 쭈루룩 나옴.
                         //document.getData() or document.getId() 등등 여러 방법으로
                         //데이터를 가져올 수 있다.
                     }
@@ -80,6 +77,7 @@ public class Community extends AppCompatActivity {
         System.out.println(testList.size());
 
         btn_write = findViewById(R.id.button_write);
+        btn_back = findViewById(R.id.button_back);
 
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.community);
@@ -110,6 +108,14 @@ public class Community extends AppCompatActivity {
                 return false;
             }
         });
+        //뒤로
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
         //글쓰기
         btn_write.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,10 +134,10 @@ public class Community extends AppCompatActivity {
 //                                Toast.LENGTH_LONG).show();
                 Intent intent =
                         new Intent(getApplicationContext(), Custom.class);
-                intent.putExtra("uid", testList.get(position).getUidStr());
+                intent.putExtra("uid", testList.get(position).getUidStr()); //수정할때 고정id값이 변하지 않게 하기위해 uid사용
                 intent.putExtra("id", testList.get(position).getIdStr()); //아이디 값이 커스텀으로 넘어가서 삭제할때 사용
-                intent.putExtra("title", testList.get(position).getTitle());
-                intent.putExtra("content", testList.get(position).getContent());
+                intent.putExtra("title", testList.get(position).getTitle());//제목
+                intent.putExtra("content", testList.get(position).getContent());//내용
                 //intent.putExtra("img", testList.get(position).getIcon()); testList에 사진을 저장시켜주면 나옴
                 //intent.putExtra("POSITION", position);
                 startActivity(intent);

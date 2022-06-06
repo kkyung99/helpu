@@ -20,13 +20,22 @@
         <entry key="..\:/Users/KHK/AndroidStudioProjects/HelpU/app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="..\:/Users/KHK/AndroidStudioProjects/HelpU/app/src/main/res/layout/activity_second.xml" value="0.22" />
         <entry key="..\:/Users/KHK/AndroidStudioProjects/HelpU/app/src/main/res/menu/menu.xml" value="0.22" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.146" />
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable/button.xml" value="0.1" />
-        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_change.xml" value="0.1" />
-        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_community.xml" value="0.16" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable/ic_community.xml" value="0.146" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable/ic_home.xml" value="0.146" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable/ic_launcher_background.xml" value="0.146" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable/ic_map.xml" value="0.146" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable/ic_profile.xml" value="0.146" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable/rounded.xml" value="0.146" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_change.xml" value="0.2" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_community.xml" value="0.2" />
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_custom.xml" value="0.2" />
-        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_write.xml" value="0.1" />
-        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/listview_item.xml" value="0.176" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_write.xml" value="0.2" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/listview_item.xml" value="0.1" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/menu/menu.xml" value="0.25364583333333335" />
       </map>
     </option>
   </component>
