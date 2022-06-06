@@ -42,7 +42,7 @@ public class ListViewAdapter extends BaseAdapter{
         ListViewItem listViewItem = listViewItemList.get(position);
 
         titleTextView.setText(listViewItem.getTitle());
-        iconImageView.setImageResource(listViewItem.getIcon());
+//        iconImageView.setImageResource(listViewItem.getIcon());
         contentTextView.setText(listViewItem.getContent());
 
         flg[0] = flg[1] = false; // 기본값을 설정합니다

@@ -9,7 +9,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -23,6 +28,7 @@ public class Custom extends AppCompatActivity{
     EditText comment; //댓글
     ListView listView1;
     ArrayList<String> items;
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,24 +76,33 @@ public class Custom extends AppCompatActivity{
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ListViewItem item = new ListViewItem();
-//                item.setTitle(textTitle.getText().toString());
-//                item.setContent(textContent.getText().toString());
-                Intent intent = new Intent(Custom.this, Community.class);
-                startActivity(intent);
-//                if(Integer.parseInt(textTitle.getText().toString()) > -1){
-//                    item.remove(Integer.parseInt(textTitle.getText().toString()));
+                System.out.println("intent.getStringExtra(id)");
+                System.out.println(intent.getStringExtra("id"));
+                db.collection("communityPosts").document(intent.getStringExtra("id")).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    //고유값id으로 document를 가져온것 .이전까지 / delete는 가져온걸 삭제하겠다./add~
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        //작업이 성공하면 넘겨줘서 삭제되서 다시 리스트를 불러왔을때 없어진것을 볼수있음.
+                        Intent intent = new Intent(Custom.this, Community.class);
+                        startActivity(intent);
+                    }
+                }
+            });
 //
-//                }
             }
         });
         //수정
         btn_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Custom.this, Change.class);
                 final String title = textTitle.getText().toString();
                 final String content = textContent.getText().toString();
+                final String id = intent.getStringExtra("id");
+                final String uid = intent.getStringExtra("uid");
+                Intent intent = new Intent(Custom.this, Change.class);
+                intent.putExtra("uid", uid);// 파이어베이스와 아이디를 구분하기위한 내가 직접 지정한 고유아이디
+                intent.putExtra("id", id); //파이어베이스에서 사용하는 고유아이디
                 intent.putExtra("title",title);
                 intent.putExtra("content",content);
                 startActivity(intent);

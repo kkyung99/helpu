@@ -58,15 +58,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"/>
-    <android.widget.Button
+    <ImageView
         android:id="@+id/button_write"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="600dp"
-        android:layout_marginLeft="270dp"
-        android:text="글쓰기"
-        android:textSize="15dp"
-        android:background="@drawable/button"/>
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="580dp"
+        android:layout_marginLeft="300dp"
+        android:background="@drawable/plus"/>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigator"
         android:layout_width="match_parent"
