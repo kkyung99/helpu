@@ -1,7 +1,10 @@
 package com.example.helpu;
 
+import static com.example.helpu.LoginActivity.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,10 +16,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import java.util.Map;
 
 public class Custom extends AppCompatActivity{
     Button btn_delete;//삭제
@@ -31,6 +42,7 @@ public class Custom extends AppCompatActivity{
     private ListView listView1;
     private ListViewAdapter adapter;
     private ArrayList<TextView> items = new ArrayList<TextView>();
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +62,7 @@ public class Custom extends AppCompatActivity{
         textTitle = findViewById(R.id.txtTitle);
         //img = findViewById(R.id.img);
         textContent = findViewById(R.id.txtContent);
-        comment  = findViewById(R.id.comment);
+        comment = findViewById(R.id.txtContent1);
 
         listView1.setAdapter(adapter);
 
@@ -65,16 +77,33 @@ public class Custom extends AppCompatActivity{
         //댓글등록
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
-            public  void onClick(View v){
+            public  void onClick(View v) {
                 String comment1 = comment.getText().toString();
-                if(comment1.length() != 0){
-                    items.add(comment);
+                if (comment1.length() == 0) {
                     comment.setText("댓글을 입력하세요.");
-                    adapter.notifyDataSetChanged();
+                    return;
                 }
-//                items.add(comment.getText().toString());
-//                adapter.notifyDataSetChanged();
-//                comment.setText("");
+                Map<String, Object> comment = new HashMap<>();
+                comment.put("comment", comment1);
+                comment.put("postId", intent.getStringExtra("id"));
+                comment.put("authorUid", auth.getCurrentUser().getUid());
+                comment.put("authorName", auth.getCurrentUser().getDisplayName());
+                comment.put("timeStamp", FieldValue.serverTimestamp());
+
+                db.collection("communityComments").add(comment).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        //데이터가 성공적으로 추가되었을 때
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    //    items.add(comment1);
+                        adapter.notifyDataSetChanged();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         });
         //뒤로
