@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,20 +22,24 @@ public class Custom extends AppCompatActivity{
     Button btn_delete;//삭제
     Button btn_change;//수정
     Button btn_upload;//댓글등록
+    ListView listview1;
     ImageView btn_back;
     TextView textTitle;
     //ImageView img;
     TextView textContent;
-    EditText comment; //댓글
-    ListView listView1;
-    ArrayList<String> items;
+    TextView comment; //댓글
+    private ListView listView1;
+    private ListViewAdapter adapter;
+    private ArrayList<TextView> items = new ArrayList<TextView>();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom);
 
-        items = new ArrayList<String>();
+        adapter = new ListViewAdapter();
+        listview1 = (ListView) findViewById(R.id.listview1);
+        listview1.setAdapter(adapter);
         final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,items);
 
         listView1 = findViewById(R.id.listview1);
@@ -47,7 +50,7 @@ public class Custom extends AppCompatActivity{
         textTitle = findViewById(R.id.txtTitle);
         //img = findViewById(R.id.img);
         textContent = findViewById(R.id.txtContent);
-        comment  = findViewById(R.id.txtContent1);
+        comment  = findViewById(R.id.comment);
 
         listView1.setAdapter(adapter);
 
@@ -65,7 +68,7 @@ public class Custom extends AppCompatActivity{
             public  void onClick(View v){
                 String comment1 = comment.getText().toString();
                 if(comment1.length() != 0){
-                    items.add(comment1);
+                    items.add(comment);
                     comment.setText("댓글을 입력하세요.");
                     adapter.notifyDataSetChanged();
                 }
