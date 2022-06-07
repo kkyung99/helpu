@@ -27,7 +27,7 @@ public class CommentChange extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change);
+        setContentView(R.layout.activity_commentchange);
 
         btn_change = findViewById(R.id.button_change);
         btn_back = findViewById(R.id.btn_back);
@@ -51,13 +51,14 @@ public class CommentChange extends AppCompatActivity{
             public void onClick(View v) {
                 Map<String, Object> post = new HashMap<>();
                 post.put("comment", edit_change.getText().toString());
-                post.put("uid", intent.getStringExtra("uid"));
+                post.put("authorName", intent.getStringExtra("authorName"));
+                post.put("authorUid", intent.getStringExtra("authorUid"));
                 post.put("timeStamp", FieldValue.serverTimestamp());
                 db.collection("communityComments").document(intent.getStringExtra("id")).set(post).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(CommentChange.this, CommentChange.class);
+                            Intent intent = new Intent(CommentChange.this, Custom.class);
                             startActivity(intent);
                         }
                     }

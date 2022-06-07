@@ -26,10 +26,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Write extends Activity {
     Button btn_write;//저장
@@ -40,7 +44,9 @@ public class Write extends Activity {
     public static final int REQUEST_CODE = 1000;
     final FirebaseAuth auth = FirebaseAuth.getInstance();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    FirebaseStorage storage;
+    StorageReference storageReference;
+    Uri photoUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +56,9 @@ public class Write extends Activity {
         imageView = findViewById(R.id.select_image); //이미지선택
         txt_write = (EditText) findViewById(R.id.title_name); //제목
         txt_write2 = (EditText) findViewById(R.id.content); //본문
+
+        storage = FirebaseStorage.getInstance("gs://help-u-32c8c.appspot.com");
+        storageReference = storage.getReference();
 
         //뒤로
         btn_back.setOnClickListener(new View.OnClickListener() {
@@ -77,26 +86,42 @@ public class Write extends Activity {
 //                item.setIcon(imageView.getImageAlpha());
 //                Community.testList.add(item);
 
-                String title = txt_write.getText().toString();
-                String content = txt_write2.getText().toString();
-
-                Map<String, Object> post = new HashMap<>();
-                post.put("title", title);
-                post.put("content", content);
-                post.put("uid", auth.getCurrentUser().getUid());
-                post.put("timeStamp", FieldValue.serverTimestamp());
-
-                db.collection("communityPosts").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
+                ref.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        //데이터가 성공적으로 추가되었을 때
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //에러가 발생했을 때
-                        Log.w(TAG, "Error ", e);
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        System.out.println("success upload");
+                        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                System.out.println(uri.toString());
+
+                                String title = txt_write.getText().toString();
+                                String content = txt_write2.getText().toString();
+                                Integer image = imageView.getImageAlpha();
+
+                                Map<String, Object> post = new HashMap<>();
+                                post.put("title", title);
+                                post.put("content", content);
+                                post.put("image",uri.toString());
+                                post.put("uid", auth.getCurrentUser().getUid());
+                                post.put("timeStamp", FieldValue.serverTimestamp());
+
+                                db.collection("communityPosts").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        //데이터가 성공적으로 추가되었을 때
+                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        //에러가 발생했을 때
+                                        Log.w(TAG, "Error ", e);
+                                    }
+                                });
+                            }
+                        });
                     }
                 });
 
@@ -125,7 +150,7 @@ public class Write extends Activity {
             //response에 getData , return data 부분 추가해주어야 한다
 
             Object selectedImage = data.getData();
-            Uri photoUri = data.getData();
+            photoUri = data.getData();
             Bitmap bitmap = null;
             //bitmap 이용
             try {

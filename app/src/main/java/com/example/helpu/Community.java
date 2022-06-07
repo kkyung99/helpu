@@ -40,7 +40,7 @@ public class Community extends AppCompatActivity {
         setContentView(R.layout.activity_community);
 
 
-        adapter = new ListViewAdapter();
+        adapter = new ListViewAdapter(getApplicationContext());
 
         listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter);
@@ -56,13 +56,14 @@ public class Community extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         System.out.println(document.getData());
                         //doucument 결과를 어뎁터에 저장
-                        adapter.addItem(document.get("title").toString(), R.drawable.login_logo, document.get("content").toString());
+                        adapter.addItem(document.get("title").toString(), document.get("image").toString(), document.get("content").toString());
                         adapter.notifyDataSetChanged();
                         ListViewItem listviewData = new ListViewItem(); //listviewData객체 생성
                         listviewData.setUidStr(document.get("uid").toString()); //수정페이지에서 uid값을 사용하기 위해
                         listviewData.setIdStr(document.getId()); //고정id값 저장
                         listviewData.setTitle(document.get("title").toString()); //제목
-                        listviewData.setIcon(R.drawable.login_logo);//이미지
+                        listviewData.setIcon(document.get("image").toString()); //제목
+                        //listviewData.setIcon(R.drawable.login_logo);//이미지
                         listviewData.setContent(document.get("content").toString());//내용
                         testList.add(listviewData);//listviewData를 testlist배열안에 저장해준다. 그럼 쭈루룩 나옴.
                         //document.getData() or document.getId() 등등 여러 방법으로
@@ -138,6 +139,7 @@ public class Community extends AppCompatActivity {
                 intent.putExtra("id", testList.get(position).getIdStr()); //아이디 값이 커스텀으로 넘어가서 삭제할때 사용
                 intent.putExtra("title", testList.get(position).getTitle());//제목
                 intent.putExtra("content", testList.get(position).getContent());//내용
+                intent.putExtra("image", testList.get(position).getIcon());//이미지
                 //intent.putExtra("img", testList.get(position).getIcon()); testList에 사진을 저장시켜주면 나옴
                 //intent.putExtra("POSITION", position);
                 startActivity(intent);

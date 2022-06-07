@@ -1,7 +1,7 @@
 package com.example.helpu;
 
 public class ListViewItem {
-    private int iconDrawable;
+    private String iconDrawable;
     private String contentStr;
     private String titleStr;
     private String idStr;//객체 마다 고유아이디 때문에 추가함
@@ -11,7 +11,7 @@ public class ListViewItem {
         titleStr = title;
     }
 
-    public void setIcon(int icon) {
+    public void setIcon(String icon) {
 
         iconDrawable = icon;
     }
@@ -21,7 +21,7 @@ public class ListViewItem {
         contentStr = content;
     }
 
-    public int getIcon() {
+    public String  getIcon() {
 
         return this.iconDrawable;
     }

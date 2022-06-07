@@ -1,7 +1,10 @@
 package com.example.helpu;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,18 +12,26 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class ListViewAdapter extends BaseAdapter{
-    //private ImageView iconImageView;
+    private ImageView iconImageView;
     private TextView titleTextView;
     private TextView contentTextView;
     private ArrayList<ListViewItem>listViewItemList=new ArrayList<ListViewItem>();
     //private boolean[] flg = new boolean[2];
     //private ImageView[] imageView = new ImageView[2];
-
-    public  ListViewAdapter(){
-
+    Context context;
+    public  ListViewAdapter(Context context){
+        this.context = context;
     }
     @Override
     public  int getCount(){
@@ -37,12 +48,12 @@ public class ListViewAdapter extends BaseAdapter{
             convertView = inflater.inflate(R.layout.listview_item,parent,false);
         }
         titleTextView = (TextView) convertView.findViewById(R.id.title);
-//        iconImageView = (ImageView) convertView.findViewById(R.id.icon);
+        iconImageView = (ImageView) convertView.findViewById(R.id.icon);
         contentTextView =(TextView) convertView.findViewById(R.id.content);
         ListViewItem listViewItem = listViewItemList.get(position);
 
         titleTextView.setText(listViewItem.getTitle());
-//        iconImageView.setImageResource(listViewItem.getIcon());
+        Glide.with(context).load(listViewItem.getIcon()).into(iconImageView);
         contentTextView.setText(listViewItem.getContent());
 
         //flg[0] = flg[1] = false; // 기본값을 설정합니다
@@ -81,7 +92,7 @@ public class ListViewAdapter extends BaseAdapter{
         return listViewItemList.get(position);
     }
 
-    public void delete (String title, int icon, String content){
+    public void delete (String title, String icon, String content){
         ListViewItem item = new ListViewItem();
         item.setTitle(title);
         item.setIcon(icon);
@@ -90,7 +101,7 @@ public class ListViewAdapter extends BaseAdapter{
         notifyDataSetChanged();
     }
 
-    public void addItem(String title, int icon, String content){
+    public void addItem(String title, String icon, String content){
         ListViewItem item = new ListViewItem();
 
         item.setTitle(title);
