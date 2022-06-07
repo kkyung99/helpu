@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -105,6 +107,28 @@ public class Custom extends AppCompatActivity{
                     }
                 });
             }
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                //작업이 성공적으로 마쳤을때
+//                if (task.isSuccessful()) {
+//                    System.out.println("ㅅㅓㅇ공!!!!!!");
+//                    //컬렉션 아래에 있는 모든 정보를 가져온다.
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        System.out.println(document.getData());
+//                        //doucument 결과를 어뎁터에 저장
+//                        adapter.addItem(document.get("authorName").toString(), document.get("comment").toString(),document.get("timeStamp").toString());
+//                        adapter.notifyDataSetChanged();
+//                        CommentItem CommentData = new CommentItem(); //listviewData객체 생성
+//                        CommentData.setUidStr(document.get("uid").toString()); //수정페이지에서 uid값을 사용하기 위해
+//                        CommentData.setIdStr(document.getId()); //고정id값 저장
+//                        CommentData.setTitle(document.get("comment").toString()); //댓글
+//                        items.add();//listviewData를 testlist배열안에 저장해준다. 그럼 쭈루룩 나옴.
+//                        //document.getData() or document.getId() 등등 여러 방법으로
+//                        //데이터를 가져올 수 있다.
+//                    }
+//                    //그렇지 않을때
+//                } else {/
+//                }
+//            //}
         });
         //뒤로
         btn_back.setOnClickListener(new View.OnClickListener() {

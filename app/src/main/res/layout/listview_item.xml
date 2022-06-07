@@ -47,11 +47,11 @@
                 android:textSize="15dp" />
         </LinearLayout>
     </LinearLayout>
-        <ImageView
-            android:id="@+id/unlike"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="330dp"
-            android:layout_marginTop="180dp"
-            android:src="@drawable/unlike1" />
+<!--        <ImageView-->
+<!--            android:id="@+id/unlike"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginLeft="330dp"-->
+<!--            android:layout_marginTop="180dp"-->
+<!--            android:src="@drawable/unlike1" />-->
 </RelativeLayout>
