@@ -21,6 +21,7 @@
             android:id="@+id/comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scrollbars="vertical"
             android:text="comment"
             android:textSize="20dp"
             tools:layout_editor_absoluteX="76dp"
@@ -35,16 +36,16 @@
                 android:layout_height="50dp"
                 android:text="수정"
                 android:textSize="15dp"
-                android:background="@drawable/button"
-                android:layout_marginLeft="220dp" />
+                android:layout_marginLeft="220dp"
+                android:background="@drawable/button" />
 
             <Button
                 android:id="@+id/comment_delete"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:background="@drawable/button"
                 android:text="삭제"
                 android:textSize="15dp"
-                android:background="@drawable/button"
                 android:layout_marginLeft="15dp" />
 
         </LinearLayout>

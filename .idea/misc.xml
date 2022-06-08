@@ -29,14 +29,20 @@
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable/ic_map.xml" value="0.146" />
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable/ic_profile.xml" value="0.146" />
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/drawable/rounded.xml" value="0.146" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_animalwrite.xml" value="0.264" />
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_change.xml" value="0.2" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_change1.xml" value="0.12284701114488349" />
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_commentchange.xml" value="0.2" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_commentchange1.xml" value="0.2" />
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_community.xml" value="0.2" />
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_custom.xml" value="0.2" />
-        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_custom1.xml" value="0.1" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/activity_write.xml" value="0.2" />
-        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/comment_item.xml" value="0.1" />
-        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/listview_item.xml" value="0.1" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/animal_item.xml" value="0.2" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/comment_item.xml" value="0.2" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/comment_item1.xml" value="0.176" />
+        <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/layout/listview_item.xml" value="0.2" />
         <entry key="..\:/Users/SEC/AndroidStudioProjects/helpu/app/src/main/res/menu/menu.xml" value="0.25364583333333335" />
       </map>
     </option>

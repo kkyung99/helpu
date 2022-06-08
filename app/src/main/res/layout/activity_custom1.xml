@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/warm_gray">
 
     <ImageView
         android:id="@+id/btn_back"
@@ -46,6 +47,7 @@
             android:layout_width="350dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"
+            android:scrollbars="vertical"
             android:text="내용"
             android:textSize="10pt" />
 

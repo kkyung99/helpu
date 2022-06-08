@@ -26,7 +26,6 @@ import java.util.ArrayList;
 
 public class Community extends AppCompatActivity {
     ImageView btn_write;
-    ImageView btn_back;
     private ListView listview;
     private ListViewAdapter adapter;
     SearchView search_view;
@@ -62,7 +61,7 @@ public class Community extends AppCompatActivity {
                         listviewData.setUidStr(document.get("uid").toString()); //수정페이지에서 uid값을 사용하기 위해
                         listviewData.setIdStr(document.getId()); //고정id값 저장
                         listviewData.setTitle(document.get("title").toString()); //제목
-                        listviewData.setIcon(document.get("image").toString()); //제목
+                        listviewData.setIcon(document.get("image").toString()); //이미지
                         //listviewData.setIcon(R.drawable.login_logo);//이미지
                         listviewData.setContent(document.get("content").toString());//내용
                         testList.add(listviewData);//listviewData를 testlist배열안에 저장해준다. 그럼 쭈루룩 나옴.
@@ -78,7 +77,6 @@ public class Community extends AppCompatActivity {
         System.out.println(testList.size());
 
         btn_write = findViewById(R.id.button_write);
-        btn_back = findViewById(R.id.button_back);
 
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.community);
@@ -107,14 +105,6 @@ public class Community extends AppCompatActivity {
                         return true;
                 }
                 return false;
-            }
-        });
-        //뒤로
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
             }
         });
         //글쓰기

@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class Write extends Activity {
+public class AnimalWrite extends Activity {
     Button btn_write;//저장
     ImageView btn_back;
     EditText txt_write;//제목
@@ -50,21 +50,21 @@ public class Write extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write);
+        setContentView(R.layout.activity_animalwrite);
         btn_write = findViewById(R.id.button_write); //저장버튼
         btn_back = findViewById(R.id.btn_back);
         imageView = findViewById(R.id.select_image); //이미지선택
         txt_write = (EditText) findViewById(R.id.title_name); //제목
         txt_write2 = (EditText) findViewById(R.id.content); //본문
 
-        storage = FirebaseStorage.getInstance("gs://help-u-32c8c.appspot.com");//이미지 저장경로
+        storage = FirebaseStorage.getInstance("gs://help-u-32c8c.appspot.com");
         storageReference = storage.getReference();
 
         //뒤로
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Community.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -76,7 +76,7 @@ public class Write extends Activity {
 //                list.add(txt_write.getText().toString()); //입력된 값을 ArrayList에 추가하기
 //                adapter.notifyDataSetChanged();
                 //txt_write.setText(""); //입력된 값 지우기
-                Intent intent = new Intent(Write.this, Community.class);
+                Intent intent = new Intent(AnimalWrite.this, MainActivity.class);
 //                intent.putExtra("title",txt_write.getText().toString());
 //                intent.putExtra("content",txt_write2.getText().toString());
 
@@ -107,7 +107,7 @@ public class Write extends Activity {
                                 post.put("uid", auth.getCurrentUser().getUid());
                                 post.put("timeStamp", FieldValue.serverTimestamp());
 
-                                db.collection("communityPosts").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                db.collection("communityAnimal").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         //데이터가 성공적으로 추가되었을 때

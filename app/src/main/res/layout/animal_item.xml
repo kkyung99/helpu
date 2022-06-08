@@ -18,13 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="아이디"
-            android:textSize="20dp"/>
+            android:textSize="20dp"/>//여기에 작성자아이디가 들어가게
         <TextView
             android:id="@+id/title"
             android:layout_width="400dp"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:text="제목"
+            android:text="강아지를 찾습니다."
             android:textSize="15dp" />
 
         <LinearLayout
@@ -49,15 +49,8 @@
                 android:layout_marginLeft="-350dp"
                 android:scrollbars = "vertical"
                 android:gravity="top"
-                android:text="테스트입니다."
+                android:text="강쥐"
                 android:textSize="15dp" />
         </LinearLayout>
     </LinearLayout>
-<!--        <ImageView-->
-<!--            android:id="@+id/unlike"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_marginLeft="330dp"-->
-<!--            android:layout_marginTop="180dp"-->
-<!--            android:src="@drawable/unlike1" />-->
 </RelativeLayout>
