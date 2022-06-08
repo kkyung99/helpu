@@ -29,8 +29,9 @@
         <TextView
             android:id="@+id/txtTitle"
             android:layout_width="350dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
+            android:scrollbars="vertical"
             android:text="제목"
             android:textSize="10pt" />
 
@@ -46,6 +47,7 @@
             android:layout_width="350dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"
+            android:scrollbars="vertical"
             android:text="내용"
             android:textSize="10pt" />
 

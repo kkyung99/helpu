@@ -9,6 +9,7 @@ import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +59,9 @@ public class AnimalChange extends AppCompatActivity {
         img = findViewById(R.id.img1);
         editContent = findViewById(R.id.txtContent2);
 
+        editTitle.setMovementMethod(new ScrollingMovementMethod());
+        editContent.setMovementMethod(new ScrollingMovementMethod());
+
         //보내온 intent를 얻는다.
         Intent intent = getIntent();
         editTitle.setText(intent.getStringExtra("title"));
@@ -93,11 +97,12 @@ public class AnimalChange extends AppCompatActivity {
                 post.put("title", editTitle.getText().toString());
                 post.put("content", editContent.getText().toString());
                 post.put("image", intent.getStringExtra("image"));
+                post.put("name", intent.getStringExtra("name"));
                 post.put("uid", intent.getStringExtra("uid")); //커뮤니티에서 uid값을 받아서 상세페이지로 넘겨주고 상세에서 수정페이지로 넘겨준것. 이유는 고유값이 변경되면 안되므로.
                 post.put("timeStamp", FieldValue.serverTimestamp());
 
                 StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
-                if (photoUri.getPath() != "") {
+                if (photoUri != null && photoUri.getPath() != "") {
                     ref.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -111,7 +116,16 @@ public class AnimalChange extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Intent intent = new Intent(AnimalChange.this, MainActivity.class);
+                                                String uid = intent.getStringExtra("uid");
+                                                String id = intent.getStringExtra("id");
+                                                String name = intent.getStringExtra("name");
+                                                Intent intent = new Intent(AnimalChange.this, AnimalCustom.class);
+                                                intent.putExtra("uid", uid); //수정할때 고정id값이 변하지 않게 하기위해 uid사용
+                                                intent.putExtra("id", id); //아이디 값이 커스텀으로 넘어가서 삭제할때 사용
+                                                intent.putExtra("title", editTitle.getText().toString());//제목
+                                                intent.putExtra("content", editContent.getText().toString());//내용
+                                                intent.putExtra("name", name);
+                                                intent.putExtra("image", uri.toString());//이미지
                                                 startActivity(intent);
                                             }
                                         }
@@ -126,7 +140,17 @@ public class AnimalChange extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(AnimalChange.this, Community.class);
+                                String uid = intent.getStringExtra("uid");
+                                String id = intent.getStringExtra("id");
+                                String image = intent.getStringExtra("image");
+                                String name = intent.getStringExtra("name");
+                                Intent intent = new Intent(AnimalChange.this, AnimalCustom.class);
+                                intent.putExtra("uid", uid); //수정할때 고정id값이 변하지 않게 하기위해 uid사용
+                                intent.putExtra("id", id); //아이디 값이 커스텀으로 넘어가서 삭제할때 사용
+                                intent.putExtra("title", editTitle.getText().toString());//제목
+                                intent.putExtra("content", editContent.getText().toString());//내용
+                                intent.putExtra("image", image);//이미지
+                                intent.putExtra("name", name);
                                 startActivity(intent);
                             }
                         }

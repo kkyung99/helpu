@@ -105,12 +105,14 @@ public class Write extends Activity {
                                 post.put("content", content);
                                 post.put("image",uri.toString());
                                 post.put("uid", auth.getCurrentUser().getUid());
+                                post.put("name", auth.getCurrentUser().getDisplayName());
                                 post.put("timeStamp", FieldValue.serverTimestamp());
 
                                 db.collection("communityPosts").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         //데이터가 성공적으로 추가되었을 때
+                                        startActivity(intent);
                                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -128,7 +130,6 @@ public class Write extends Activity {
 
 
 
-                startActivity(intent);
                 //finish();
             }
         });

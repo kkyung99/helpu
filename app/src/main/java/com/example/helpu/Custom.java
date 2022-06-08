@@ -4,6 +4,7 @@ import static com.example.helpu.LoginActivity.TAG;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -44,6 +45,7 @@ public class Custom extends AppCompatActivity{
     ImageView img;
     TextView textContent;
     TextView comment; //댓글
+    TextView name;
     private ListView listView1;
     private CommentAdapter adapter;
     private ArrayList<TextView> items = new ArrayList<TextView>();
@@ -56,8 +58,6 @@ public class Custom extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom);
 
-        adapter = new CommentAdapter(getApplicationContext());
-
         listView1 = findViewById(R.id.listview1);
         btn_upload = findViewById(R.id.upload);
         btn_delete = findViewById(R.id.delete);
@@ -67,13 +67,18 @@ public class Custom extends AppCompatActivity{
         img = findViewById(R.id.img);
         textContent = findViewById(R.id.txtContent);
         comment = findViewById(R.id.txtContent1);
+        name = findViewById(R.id.name);
 
-        listView1.setAdapter(adapter);
+        textTitle.setMovementMethod(new ScrollingMovementMethod());
+        textContent.setMovementMethod(new ScrollingMovementMethod());
 
         //보내온 intent를 얻는다.
         Intent intent = getIntent();
+        adapter = new CommentAdapter(getApplicationContext(), intent.getStringExtra("title"), intent.getStringExtra("content"), intent.getStringExtra("image"), intent.getStringExtra("id"), intent.getStringExtra("name"));
+        listView1.setAdapter(adapter);
         textTitle.setText(intent.getStringExtra("title"));
         textContent.setText(intent.getStringExtra("content"));
+        name.setText(intent.getStringExtra("name"));
         Glide.with(getApplicationContext()).load(intent.getStringExtra("image")).into(img);
         //img.setImageResource(intent.getIntExtra("img",0));
         //String text = intent.getExtras().getString("POSITION");
@@ -89,9 +94,11 @@ public class Custom extends AppCompatActivity{
                     //컬렉션 아래에 있는 모든 정보를 가져온다.
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         System.out.println(document.getData());
-                        //doucument 결과를 어뎁터에 저장
-                        adapter.addItem(document.get("comment").toString(),document.get("authorName").toString(),document.get("authorUid").toString(), document.getId());
-                        adapter.notifyDataSetChanged();
+                        if (document.get("postId").equals(intent.getStringExtra("id"))) {
+                            //doucument 결과를 어뎁터에 저장
+                            adapter.addItem(document.get("comment").toString(), document.get("authorName").toString(), document.get("authorUid").toString(), document.getId());
+                            adapter.notifyDataSetChanged();
+                        }
 //                        CommentItem listviewData = new CommentItem(); //listviewData객체 생성
 //                        testList.add(listviewData);//listviewData를 testlist배열안에 저장해준다. 그럼 쭈루룩 나옴.
 //                        document.getData() or document.getId() 등등 여러 방법으로
@@ -113,20 +120,22 @@ public class Custom extends AppCompatActivity{
                     comment.setText("댓글을 입력하세요.");
                     return;
                 }
-                Map<String, Object> comment = new HashMap<>();
-                comment.put("comment", comment1);
-                comment.put("postId", intent.getStringExtra("id"));
-                comment.put("authorUid", auth.getCurrentUser().getUid());
-                comment.put("authorName", auth.getCurrentUser().getDisplayName());
-                comment.put("timeStamp", FieldValue.serverTimestamp());
+                Map<String, Object> commentData = new HashMap<>();
+                commentData.put("comment", comment1);
+                commentData.put("postId", intent.getStringExtra("id"));
+                commentData.put("authorUid", auth.getCurrentUser().getUid());
+                commentData.put("authorName", auth.getCurrentUser().getDisplayName());
+                commentData.put("timeStamp", FieldValue.serverTimestamp());
 
-                db.collection("communityComments").add(comment).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                db.collection("communityComments").add(commentData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         //데이터가 성공적으로 추가되었을 때
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                         //    items.add(comment1);
+                        comment.setText("");//댓글 작성 후 댓글 초기화
                         adapter.notifyDataSetChanged();
+                        recreate();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -195,6 +204,7 @@ public class Custom extends AppCompatActivity{
                 final String id = intent.getStringExtra("id");
                 final String uid = intent.getStringExtra("uid");
                 final String image = intent.getStringExtra("image");
+                String name = intent.getStringExtra("name");
                 Intent intent = new Intent(Custom.this, Change.class);
                 intent.putExtra("uid", uid);// 파이어베이스와 아이디를 구분하기위한 내가 직접 지정한 고유아이디
                 //커뮤니티에서 부터 계속 수정을 위해 uid값을 넘겨주고있다.
@@ -202,6 +212,7 @@ public class Custom extends AppCompatActivity{
                 intent.putExtra("title",title); //제목
                 intent.putExtra("content",content); //내용
                 intent.putExtra("image", image); //내용
+                intent.putExtra("name", name);
                 startActivity(intent);
             }
         });

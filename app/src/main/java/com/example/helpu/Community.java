@@ -55,13 +55,14 @@ public class Community extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         System.out.println(document.getData());
                         //doucument 결과를 어뎁터에 저장
-                        adapter.addItem(document.get("title").toString(), document.get("image").toString(), document.get("content").toString());
+                        adapter.addItem(document.getId(), document.get("title").toString(), document.get("image").toString(), document.get("content").toString(), document.get("name").toString());
                         adapter.notifyDataSetChanged();
                         ListViewItem listviewData = new ListViewItem(); //listviewData객체 생성
                         listviewData.setUidStr(document.get("uid").toString()); //수정페이지에서 uid값을 사용하기 위해
                         listviewData.setIdStr(document.getId()); //고정id값 저장
                         listviewData.setTitle(document.get("title").toString()); //제목
                         listviewData.setIcon(document.get("image").toString()); //이미지
+                        listviewData.setNameStr(document.get("name").toString());
                         //listviewData.setIcon(R.drawable.login_logo);//이미지
                         listviewData.setContent(document.get("content").toString());//내용
                         testList.add(listviewData);//listviewData를 testlist배열안에 저장해준다. 그럼 쭈루룩 나옴.
@@ -130,6 +131,7 @@ public class Community extends AppCompatActivity {
                 intent.putExtra("title", testList.get(position).getTitle());//제목
                 intent.putExtra("content", testList.get(position).getContent());//내용
                 intent.putExtra("image", testList.get(position).getIcon());//이미지
+                intent.putExtra("name", testList.get(position).getNameStr());
                 //intent.putExtra("img", testList.get(position).getIcon()); testList에 사진을 저장시켜주면 나옴
                 //intent.putExtra("POSITION", position);
                 startActivity(intent);

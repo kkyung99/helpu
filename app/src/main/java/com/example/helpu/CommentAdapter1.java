@@ -21,12 +21,23 @@ public class CommentAdapter1 extends BaseAdapter {
     TextView comment;
     Button comment_change;
     Button commnet_delete;
+    TextView name;
     ArrayList<CommentItem> CommentItemList=new ArrayList<CommentItem>();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Context context;
+    private String title;
+    private String content;
+    private String image;
+    private String postId;
+    private String authorName;
 
-    public  CommentAdapter1(Context context){
+    public  CommentAdapter1(Context context, String title, String content, String image, String postId, String authorName){
         this.context = context;
+        this.title = title;
+        this.content = content;
+        this.image = image;
+        this.postId = postId;
+        this.authorName = authorName;
     }
     @Override
     public  int getCount(){
@@ -42,6 +53,7 @@ public class CommentAdapter1 extends BaseAdapter {
             convertView = inflater.inflate(R.layout.comment_item1,parent,false);
         }
         comment = (TextView) convertView.findViewById(R.id.comment);
+        name = convertView.findViewById(R.id.name);
         comment_change = (Button) convertView.findViewById(R.id.comment_change);
         commnet_delete = (Button) convertView.findViewById(R.id.comment_delete);
         comment_change.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +65,11 @@ public class CommentAdapter1 extends BaseAdapter {
                 intent.putExtra("authorName", CommentItemList.get(pos).getAuthorName()); //파이어베이스에서 사용하는 고유아이디
                 intent.putExtra("comment",CommentItemList.get(pos).getComment()); //제목
                 intent.putExtra("id",CommentItemList.get(pos).getId()); //제목
+                intent.putExtra("postId", postId);
+                intent.putExtra("title", title);
+                intent.putExtra("content", content);
+                intent.putExtra("image", image);
+                intent.putExtra("postAuthorName", authorName);
                 context.startActivity(intent);
             }
         });
@@ -66,6 +83,11 @@ public class CommentAdapter1 extends BaseAdapter {
                         if (task.isSuccessful()) {
                             //작업이 성공하면 넘겨줘서 삭제되서 다시 리스트를 불러왔을때 없어진것을 볼수있음.
                             Intent intent = new Intent(context, AnimalCustom.class);
+                            intent.putExtra("title", title);
+                            intent.putExtra("content", content);
+                            intent.putExtra("image", image);
+                            intent.putExtra("id", postId);
+                            intent.putExtra("name", authorName);
                             context.startActivity(intent);
                         }
                     }
@@ -73,6 +95,7 @@ public class CommentAdapter1 extends BaseAdapter {
             }
         });
         comment.setText(CommentItemList.get(pos).getComment());//commentxml에 있는 comment를 여기에 받아온걸 입혀주겠다.
+        name.setText(CommentItemList.get(pos).getAuthorName());
         return convertView;
     }
     @Override

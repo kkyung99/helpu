@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -41,6 +43,7 @@ public class AnimalWrite extends Activity {
     EditText txt_write;//제목
     EditText txt_write2;//본문
     ImageView imageView;
+    TextView name;
     public static final int REQUEST_CODE = 1000;
     final FirebaseAuth auth = FirebaseAuth.getInstance();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -56,7 +59,6 @@ public class AnimalWrite extends Activity {
         imageView = findViewById(R.id.select_image); //이미지선택
         txt_write = (EditText) findViewById(R.id.title_name); //제목
         txt_write2 = (EditText) findViewById(R.id.content); //본문
-
         storage = FirebaseStorage.getInstance("gs://help-u-32c8c.appspot.com");
         storageReference = storage.getReference();
 
@@ -104,6 +106,7 @@ public class AnimalWrite extends Activity {
                                 post.put("title", title);
                                 post.put("content", content);
                                 post.put("image",uri.toString());
+                                post.put("name", auth.getCurrentUser().getDisplayName());
                                 post.put("uid", auth.getCurrentUser().getUid());
                                 post.put("timeStamp", FieldValue.serverTimestamp());
 
@@ -111,6 +114,7 @@ public class AnimalWrite extends Activity {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         //데이터가 성공적으로 추가되었을 때
+                                        startActivity(intent);
                                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -128,7 +132,6 @@ public class AnimalWrite extends Activity {
 
 
 
-                startActivity(intent);
                 //finish();
             }
         });

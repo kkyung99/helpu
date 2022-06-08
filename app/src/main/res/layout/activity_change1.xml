@@ -20,7 +20,7 @@
         <EditText
             android:id="@+id/txtTitle1"
             android:layout_width="350dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="제목"
             android:scrollbars = "vertical"
             android:textSize="8pt"

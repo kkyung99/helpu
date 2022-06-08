@@ -51,6 +51,7 @@ public class CommentChange1 extends AppCompatActivity {
             public void onClick(View v) {
                 Map<String, Object> post = new HashMap<>();
                 post.put("comment", edit_change.getText().toString());
+                post.put("postId", intent.getStringExtra("postId"));
                 post.put("authorName", intent.getStringExtra("authorName"));
                 post.put("authorUid", intent.getStringExtra("authorUid"));
                 post.put("timeStamp", FieldValue.serverTimestamp());
@@ -58,7 +59,17 @@ public class CommentChange1 extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(CommentChange1.this, Custom.class);
+                            String title = intent.getStringExtra("title");
+                            String content = intent.getStringExtra("content");
+                            String image = intent.getStringExtra("image");
+                            String authorName = intent.getStringExtra("postAuthorName");
+                            String id = intent.getStringExtra("postId");
+                            Intent intent = new Intent(CommentChange1.this, AnimalCustom.class);
+                            intent.putExtra("title", title);
+                            intent.putExtra("content", content);
+                            intent.putExtra("image", image);
+                            intent.putExtra("name", authorName);
+                            intent.putExtra("id", id);
                             startActivity(intent);
                         }
                     }

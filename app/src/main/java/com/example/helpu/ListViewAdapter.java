@@ -26,6 +26,7 @@ public class ListViewAdapter extends BaseAdapter{
     private ImageView iconImageView;
     private TextView titleTextView;
     private TextView contentTextView;
+    private TextView nameTextView;
     private ArrayList<ListViewItem>listViewItemList=new ArrayList<ListViewItem>();
     //private boolean[] flg = new boolean[2];
     //private ImageView[] imageView = new ImageView[2];
@@ -50,11 +51,13 @@ public class ListViewAdapter extends BaseAdapter{
         titleTextView = (TextView) convertView.findViewById(R.id.title);
         iconImageView = (ImageView) convertView.findViewById(R.id.icon);
         contentTextView =(TextView) convertView.findViewById(R.id.content);
+        nameTextView =(TextView) convertView.findViewById(R.id.name);
         ListViewItem listViewItem = listViewItemList.get(position);
 
         titleTextView.setText(listViewItem.getTitle());
         Glide.with(context).load(listViewItem.getIcon()).into(iconImageView);
         contentTextView.setText(listViewItem.getContent());
+        nameTextView.setText(listViewItem.getNameStr());
 
         //flg[0] = flg[1] = false; // 기본값을 설정합니다
         //imageView[0] = (ImageView) convertView.findViewById(R.id.unlike); // ID 설정을 합니다
@@ -101,12 +104,14 @@ public class ListViewAdapter extends BaseAdapter{
         notifyDataSetChanged();
     }
 
-    public void addItem(String title, String icon, String content){
+    public void addItem(String id, String title, String icon, String content, String name){
         ListViewItem item = new ListViewItem();
 
+        item.setIdStr(id);
         item.setTitle(title);
         item.setIcon(icon);
         item.setContent(content);
+        item.setNameStr(name);
 
         listViewItemList.add(item);
     }

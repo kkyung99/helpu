@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     ImageView btn_write;
     private ListView listview;
-    private ListViewAdapter adapter;
+    private AnimalAdapter adapter;
     public static ArrayList<ListViewItem> testList = new ArrayList<ListViewItem>();
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     BottomNavigationView bottomNavigationView;
@@ -34,10 +34,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        adapter = new ListViewAdapter(getApplicationContext());
+        adapter = new AnimalAdapter(getApplicationContext());
 
         listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter);
+        testList.clear(); //기존에 남아있는데이터때문에 꼬이는 걸 방지하기 위해 다 비우고 다시 불러오도록 해주기위해ㄴ
         db.collection("communityAnimal").orderBy("timeStamp", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             //orderBy로 최근시간부터 나오도록 정렬
             @Override
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         System.out.println(document.getData());
                         //doucument 결과를 어뎁터에 저장
-                        adapter.addItem(document.get("title").toString(), document.get("image").toString(), document.get("content").toString());
+                        adapter.addItem(document.getId(), document.get("title").toString(), document.get("image").toString(), document.get("content").toString(), document.get("name").toString());
                         adapter.notifyDataSetChanged();
                         ListViewItem listviewData = new ListViewItem(); //listviewData객체 생성
                         listviewData.setUidStr(document.get("uid").toString()); //수정페이지에서 uid값을 사용하기 위해
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         listviewData.setIcon(document.get("image").toString()); //제목
                         //listviewData.setIcon(R.drawable.login_logo);//이미지
                         listviewData.setContent(document.get("content").toString());//내용
+                        listviewData.setNameStr(document.get("name").toString());
                         testList.add(listviewData);//listviewData를 testlist배열안에 저장해준다. 그럼 쭈루룩 나옴.
                         //document.getData() or document.getId() 등등 여러 방법으로
                         //데이터를 가져올 수 있다.
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("title", testList.get(position).getTitle());//제목
                 intent.putExtra("content", testList.get(position).getContent());//내용
                 intent.putExtra("image", testList.get(position).getIcon());//이미지
+                intent.putExtra("name", testList.get(position).getNameStr());//이미지
                 //intent.putExtra("img", testList.get(position).getIcon()); testList에 사진을 저장시켜주면 나옴
                 //intent.putExtra("POSITION", position);
                 startActivity(intent);
