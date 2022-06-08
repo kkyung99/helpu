@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                         listviewData.setContent(document.get("content").toString());//내용
                         listviewData.setNameStr(document.get("name").toString());
                         testList.add(listviewData);//listviewData를 testlist배열안에 저장해준다. 그럼 쭈루룩 나옴.
-                        //document.getData() or document.getId() 등등 여러 방법으로
                         //데이터를 가져올 수 있다.
                     }
                     //그렇지 않을때
@@ -114,9 +113,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getApplicationContext(),
-//                                parent.getItemAtPosition(position).toString(),
-//                                Toast.LENGTH_LONG).show();
                 Intent intent =
                         new Intent(getApplicationContext(), AnimalCustom.class);
                 intent.putExtra("uid", testList.get(position).getUidStr()); //수정할때 고정id값이 변하지 않게 하기위해 uid사용
@@ -125,10 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("content", testList.get(position).getContent());//내용
                 intent.putExtra("image", testList.get(position).getIcon());//이미지
                 intent.putExtra("name", testList.get(position).getNameStr());//이미지
-                //intent.putExtra("img", testList.get(position).getIcon()); testList에 사진을 저장시켜주면 나옴
-                //intent.putExtra("POSITION", position);
                 startActivity(intent);
-
             }
         });
 

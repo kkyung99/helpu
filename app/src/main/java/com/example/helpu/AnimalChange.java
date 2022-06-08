@@ -38,12 +38,13 @@ import java.util.UUID;
 
 public class AnimalChange extends AppCompatActivity {
     Button btn_save;//저장
-    ImageView btn_back;
-    EditText editTitle;
-    ImageView img;
-    EditText editContent;
+    ImageView btn_back; //뒤로
+    EditText editTitle; //제목 수정
+    ImageView img; //이미지 수정
+    EditText editContent;//내용 수정
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    //텍스트뷰나 댓글다 위에 선언해줬는데 그 이유는 저렇게 위에쓰면 하나의 클래스 내에서 어디서는 쓸수있다.
     FirebaseStorage storage;
     StorageReference storageReference;
     Uri photoUri;
@@ -59,6 +60,7 @@ public class AnimalChange extends AppCompatActivity {
         img = findViewById(R.id.img1);
         editContent = findViewById(R.id.txtContent2);
 
+        //스크롤뷰 먹히게 하기위해 사용함(글이 길어지면 댓글이 밑으로 밀리기 때문)
         editTitle.setMovementMethod(new ScrollingMovementMethod());
         editContent.setMovementMethod(new ScrollingMovementMethod());
 
@@ -67,11 +69,9 @@ public class AnimalChange extends AppCompatActivity {
         editTitle.setText(intent.getStringExtra("title"));
         editContent.setText(intent.getStringExtra("content"));
         Glide.with(getApplicationContext()).load(intent.getStringExtra("image")).into(img);
-        //img.setImageResource(intent.getIntExtra("img",0));
-        //String text = intent.getExtras().getString("POSITION");
-        //textView.setText(text);
+        //Glide라이브러리자체가 이미지를 다루는것. (이미지 코드를 간편하게 해주기위해 아니면 엄청 긺.....)
 
-        storage = FirebaseStorage.getInstance("gs://help-u-32c8c.appspot.com");
+        storage = FirebaseStorage.getInstance("gs://help-u-32c8c.appspot.com"); //파이어베이스 이미지 경로
         storageReference = storage.getReference();
         //뒤로
         btn_back.setOnClickListener(new View.OnClickListener() {
@@ -82,9 +82,11 @@ public class AnimalChange extends AppCompatActivity {
             }
         });
 
+        //사진클릭시
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //이미지가져올때 쓰고있는것으로 EXTERNAL_CONTENT_URI는 외부사용자가 찍은 사진들을 가져오는것.
                 Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, REQUEST_CODE);
             }
@@ -94,13 +96,14 @@ public class AnimalChange extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Map<String, Object> post = new HashMap<>();
-                post.put("title", editTitle.getText().toString());
-                post.put("content", editContent.getText().toString());
-                post.put("image", intent.getStringExtra("image"));
-                post.put("name", intent.getStringExtra("name"));
-                post.put("uid", intent.getStringExtra("uid")); //커뮤니티에서 uid값을 받아서 상세페이지로 넘겨주고 상세에서 수정페이지로 넘겨준것. 이유는 고유값이 변경되면 안되므로.
-                post.put("timeStamp", FieldValue.serverTimestamp());
+                post.put("title", editTitle.getText().toString()); //수정한 제목
+                post.put("content", editContent.getText().toString());//수정한 내용
+                post.put("image", intent.getStringExtra("image"));//수정한 이미지
+                post.put("name", intent.getStringExtra("name"));//아이디
+                post.put("uid", intent.getStringExtra("uid")); //메인에서 uid값을 받아서 상세페이지로 넘겨주고 상세에서 수정페이지로 넘겨준것. 이유는 고유값이 변경되면 안되므로.
+                post.put("timeStamp", FieldValue.serverTimestamp());//시간
 
+                //파이어베이스에서 이미지 업로드시 사용하는 건데  이미지에 랜덤한이름으로 사진이 저장되도록
                 StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
                 if (photoUri != null && photoUri.getPath() != "") {
                     ref.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -124,7 +127,7 @@ public class AnimalChange extends AppCompatActivity {
                                                 intent.putExtra("id", id); //아이디 값이 커스텀으로 넘어가서 삭제할때 사용
                                                 intent.putExtra("title", editTitle.getText().toString());//제목
                                                 intent.putExtra("content", editContent.getText().toString());//내용
-                                                intent.putExtra("name", name);
+                                                intent.putExtra("name", name);//아이디
                                                 intent.putExtra("image", uri.toString());//이미지
                                                 startActivity(intent);
                                             }

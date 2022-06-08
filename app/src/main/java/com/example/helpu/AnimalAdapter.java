@@ -13,20 +13,23 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 public class AnimalAdapter  extends BaseAdapter {
-    private ImageView iconImageView;
-    private TextView titleTextView;
-    private TextView contentTextView;
-    private TextView nameTextView;
-    private ArrayList<ListViewItem>listViewItemList=new ArrayList<ListViewItem>();
-    //private boolean[] flg = new boolean[2];
-    //private ImageView[] imageView = new ImageView[2];
+    /*어뎁터를 사용하는 이유
+    안드로이드에도 기본적인 리스트뷰가 있는데 이것은 내가 원하는 리스뷰xml을 짤수없어
+    리스트뷰안에 원하는 디자인이나 기능을 넣기위해 어뎁터로 만들어서 원래의 리스트뷰에 합쳐주는것.*/
+
+    private ImageView iconImageView; //사진
+    private TextView titleTextView; //제목
+    private TextView contentTextView; //내용
+    private TextView nameTextView; //아이디
+    private ArrayList<ListViewItem>listViewItemList=new ArrayList<ListViewItem>();// 배열로 저장해서 불러올꺼임
+
     Context context;
     public  AnimalAdapter(Context context){
         this.context = context;
     }
     @Override
     public  int getCount(){
-        return listViewItemList.size();
+        return listViewItemList.size(); //리스트 아이템만큼 사이즈
     }
 
     @Override
@@ -48,28 +51,6 @@ public class AnimalAdapter  extends BaseAdapter {
         Glide.with(context).load(listViewItem.getIcon()).into(iconImageView);
         contentTextView.setText(listViewItem.getContent());
         nameTextView.setText(listViewItem.getNameStr());
-
-        //flg[0] = flg[1] = false; // 기본값을 설정합니다
-        //imageView[0] = (ImageView) convertView.findViewById(R.id.unlike); // ID 설정을 합니다
-        //imageView[1] = (ImageView) convertView.findViewById(R.id.like);
-        // 그림 터치시에, 이벤트를 발생하게 해주는 함수입니다
-//        imageView[0].setOnClickListener (new View.OnClickListener() {
-//            public void onClick(View v) {
-//
-//                Drawable drawable; // 대리자를 선언합니다
-//
-//                if (flg[0]==true) {
-//
-//                    flg[0] = false;
-//                    drawable = context.getResources().getDrawable(R.drawable.unlike1);
-//                }
-//                else{
-//                    flg[0] = true;
-//                    drawable = context.getResources().getDrawable(R.drawable.like1);
-//                }
-//                imageView[0].setImageDrawable(drawable); // 이미지를 적용합니다
-//            }
-//        });
 
         return convertView;
     }

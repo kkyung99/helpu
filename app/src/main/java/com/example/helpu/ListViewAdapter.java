@@ -28,8 +28,6 @@ public class ListViewAdapter extends BaseAdapter{
     private TextView contentTextView;
     private TextView nameTextView;
     private ArrayList<ListViewItem>listViewItemList=new ArrayList<ListViewItem>();
-    //private boolean[] flg = new boolean[2];
-    //private ImageView[] imageView = new ImageView[2];
     Context context;
     public  ListViewAdapter(Context context){
         this.context = context;
@@ -58,28 +56,6 @@ public class ListViewAdapter extends BaseAdapter{
         Glide.with(context).load(listViewItem.getIcon()).into(iconImageView);
         contentTextView.setText(listViewItem.getContent());
         nameTextView.setText(listViewItem.getNameStr());
-
-        //flg[0] = flg[1] = false; // 기본값을 설정합니다
-        //imageView[0] = (ImageView) convertView.findViewById(R.id.unlike); // ID 설정을 합니다
-        //imageView[1] = (ImageView) convertView.findViewById(R.id.like);
-        // 그림 터치시에, 이벤트를 발생하게 해주는 함수입니다
-//        imageView[0].setOnClickListener (new View.OnClickListener() {
-//            public void onClick(View v) {
-//
-//                Drawable drawable; // 대리자를 선언합니다
-//
-//                if (flg[0]==true) {
-//
-//                    flg[0] = false;
-//                    drawable = context.getResources().getDrawable(R.drawable.unlike1);
-//                }
-//                else{
-//                    flg[0] = true;
-//                    drawable = context.getResources().getDrawable(R.drawable.like1);
-//                }
-//                imageView[0].setImageDrawable(drawable); // 이미지를 적용합니다
-//            }
-//        });
 
         return convertView;
     }

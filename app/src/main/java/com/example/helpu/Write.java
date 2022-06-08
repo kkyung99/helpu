@@ -73,18 +73,7 @@ public class Write extends Activity {
         btn_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                list.add(txt_write.getText().toString()); //입력된 값을 ArrayList에 추가하기
-//                adapter.notifyDataSetChanged();
-                //txt_write.setText(""); //입력된 값 지우기
                 Intent intent = new Intent(Write.this, Community.class);
-//                intent.putExtra("title",txt_write.getText().toString());
-//                intent.putExtra("content",txt_write2.getText().toString());
-
-//                ListViewItem item = new ListViewItem();
-//                item.setTitle(txt_write.getText().toString());
-//                item.setContent(txt_write2.getText().toString());
-//                item.setIcon(imageView.getImageAlpha());
-//                Community.testList.add(item);
 
                 StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
                 ref.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -126,11 +115,6 @@ public class Write extends Activity {
                         });
                     }
                 });
-
-
-
-
-                //finish();
             }
         });
         imageView.setOnClickListener(new View.OnClickListener() {

@@ -79,10 +79,6 @@ public class AnimalCustom extends AppCompatActivity {
         textContent.setText(intent.getStringExtra("content"));
         name.setText(intent.getStringExtra("name"));
         Glide.with(getApplicationContext()).load(intent.getStringExtra("image")).into(img);
-        //img.setImageResource(intent.getIntExtra("img",0));
-        //String text = intent.getExtras().getString("POSITION");
-        //textView.setText(text);
-        System.out.println("postIdIDIdI");
         System.out.println(intent.getStringExtra("id"));
         testList.clear();
         db.collection("communityAComments").orderBy("timeStamp", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -132,7 +128,6 @@ public class AnimalCustom extends AppCompatActivity {
                     public void onSuccess(DocumentReference documentReference) {
                         //데이터가 성공적으로 추가되었을 때
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        //    items.add(comment1);
                         // db에 추가 후 adapter에 아이템 추가해줘서 뷰에서 바로 보이게끔 처리
                         adapter.addItem(comment1, auth.getCurrentUser().getDisplayName(), auth.getCurrentUser().getUid(), intent.getStringExtra("id"));
                         adapter.notifyDataSetChanged();
@@ -146,28 +141,7 @@ public class AnimalCustom extends AppCompatActivity {
                     }
                 });
             }
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                //작업이 성공적으로 마쳤을때
-//                if (task.isSuccessful()) {
-//                    System.out.println("ㅅㅓㅇ공!!!!!!");
-//                    //컬렉션 아래에 있는 모든 정보를 가져온다.
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        System.out.println(document.getData());
-//                        //doucument 결과를 어뎁터에 저장
-//                        adapter.addItem(document.get("authorName").toString(), document.get("comment").toString(),document.get("timeStamp").toString());
-//                        adapter.notifyDataSetChanged();
-//                        CommentItem CommentData = new CommentItem(); //listviewData객체 생성
-//                        CommentData.setUidStr(document.get("uid").toString()); //수정페이지에서 uid값을 사용하기 위해
-//                        CommentData.setIdStr(document.getId()); //고정id값 저장
-//                        CommentData.setTitle(document.get("comment").toString()); //댓글
-//                        items.add();//listviewData를 testlist배열안에 저장해준다. 그럼 쭈루룩 나옴.
-//                        //document.getData() or document.getId() 등등 여러 방법으로
-//                        //데이터를 가져올 수 있다.
-//                    }
-//                    //그렇지 않을때
-//                } else {/
-//                }
-//            //}
+//
         });
         //뒤로
         btn_back.setOnClickListener(new View.OnClickListener() {

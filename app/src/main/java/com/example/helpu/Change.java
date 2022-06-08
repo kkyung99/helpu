@@ -70,9 +70,6 @@ public class Change extends AppCompatActivity {
         editTitle.setText(intent.getStringExtra("title"));
         editContent.setText(intent.getStringExtra("content"));
         Glide.with(getApplicationContext()).load(intent.getStringExtra("image")).into(img);
-        //img.setImageResource(intent.getIntExtra("img",0));
-        //String text = intent.getExtras().getString("POSITION");
-        //textView.setText(text);
 
         storage = FirebaseStorage.getInstance("gs://help-u-32c8c.appspot.com");
         storageReference = storage.getReference();
