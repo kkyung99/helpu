@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,9 +25,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ImageView btn_write;
+    Button Im_formation;
     private ListView listview;
     private AnimalAdapter adapter;
-    public static ArrayList<ListViewItem> testList = new ArrayList<ListViewItem>();
+    public static ArrayList<AnimalItem> testList = new ArrayList<AnimalItem>();
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     BottomNavigationView bottomNavigationView;
     GridView gridView;
@@ -36,12 +38,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        gridView = (GridView) findViewById(R.id.gridView)
         adapter = new AnimalAdapter(getApplicationContext());
 
         listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter);
-        testList.clear(); //기존에 남아있는데이터때문에 꼬이는 걸 방지하기 위해 다 비우고 다시 불러오도록 해주기위해ㄴ
+        testList.clear(); //기존에 남아있는데이터때문에 꼬이는 걸 방지하기 위해 다 비우고 다시 불러오도록 해주기위해
         db.collection("communityAnimal").orderBy("timeStamp", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             //orderBy로 최근시간부터 나오도록 정렬
             @Override
@@ -55,12 +56,11 @@ public class MainActivity extends AppCompatActivity {
                         //doucument 결과를 어뎁터에 저장
                         adapter.addItem(document.getId(), document.get("title").toString(), document.get("image").toString(), document.get("content").toString(), document.get("name").toString());
                         adapter.notifyDataSetChanged();
-                        ListViewItem listviewData = new ListViewItem(); //listviewData객체 생성
+                        AnimalItem listviewData = new AnimalItem(); //listviewData객체 생성
                         listviewData.setUidStr(document.get("uid").toString()); //수정페이지에서 uid값을 사용하기 위해
                         listviewData.setIdStr(document.getId()); //고정id값 저장
                         listviewData.setTitle(document.get("title").toString()); //제목
-                        listviewData.setIcon(document.get("image").toString()); //제목
-                        //listviewData.setIcon(R.drawable.login_logo);//이미지
+                        listviewData.setIcon(document.get("image").toString()); //사진
                         listviewData.setContent(document.get("content").toString());//내용
                         listviewData.setNameStr(document.get("name").toString());
                         testList.add(listviewData);//listviewData를 testlist배열안에 저장해준다. 그럼 쭈루룩 나옴.
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.home);
         btn_write = findViewById(R.id.button_write);
+        Im_formation = findViewById(R.id.Im_formation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -102,6 +103,14 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                 }
                 return false;
+            }
+        });
+        //입양정보페이지
+        Im_formation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AnimalIn.class);
+                startActivity(intent);
             }
         });
         //글쓰기

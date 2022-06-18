@@ -163,20 +163,19 @@ public class AnimalCustom extends AppCompatActivity {
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("intent.getStringExtra(id)");
-                System.out.println(intent.getStringExtra("id"));
-                db.collection("communityAnimal").document(intent.getStringExtra("id")).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    //고유값id으로 document를 가져온것 .이전까지 / delete는 가져온걸 삭제하겠다./add~ (파이어베이스에서 고유값이 다다른것을 알 수 있다.)
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            //작업이 성공하면 넘겨줘서 삭제되서 다시 리스트를 불러왔을때 없어진것을 볼수있음.
-                            Intent intent = new Intent(AnimalCustom.this, MainActivity.class);
-                            startActivity(intent);
+                    System.out.println("intent.getStringExtra(id)");
+                    System.out.println(intent.getStringExtra("id"));
+                    db.collection("communityAnimal").document(intent.getStringExtra("id")).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        //고유값id으로 document를 가져온것 .이전까지 / delete는 가져온걸 삭제하겠다./add~ (파이어베이스에서 고유값이 다다른것을 알 수 있다.)
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                //작업이 성공하면 넘겨줘서 삭제되서 다시 리스트를 불러왔을때 없어진것을 볼수있음.
+                                Intent intent = new Intent(AnimalCustom.this, MainActivity.class);
+                                startActivity(intent);
+                            }
                         }
-                    }
-                });
-//
+                    });
             }
         });
         //수정

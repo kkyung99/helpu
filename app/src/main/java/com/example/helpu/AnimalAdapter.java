@@ -21,7 +21,7 @@ public class AnimalAdapter  extends BaseAdapter {
     private TextView titleTextView; //제목
     private TextView contentTextView; //내용
     private TextView nameTextView; //아이디
-    private ArrayList<ListViewItem>listViewItemList=new ArrayList<ListViewItem>();// 배열로 저장해서 불러올꺼임
+    private ArrayList<AnimalItem>listViewItemList=new ArrayList<AnimalItem>();// 배열로 저장해서 불러올꺼임
 
     Context context;
     public  AnimalAdapter(Context context){
@@ -39,13 +39,13 @@ public class AnimalAdapter  extends BaseAdapter {
 
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.listview_item,parent,false);
+            convertView = inflater.inflate(R.layout.animal_item,parent,false);
         }
         titleTextView = (TextView) convertView.findViewById(R.id.title);
         iconImageView = (ImageView) convertView.findViewById(R.id.icon);
         contentTextView =(TextView) convertView.findViewById(R.id.content);
         nameTextView =(TextView) convertView.findViewById(R.id.name);
-        ListViewItem listViewItem = listViewItemList.get(position);
+        AnimalItem listViewItem = listViewItemList.get(position);
 
         titleTextView.setText(listViewItem.getTitle());
         Glide.with(context).load(listViewItem.getIcon()).into(iconImageView);
@@ -67,7 +67,7 @@ public class AnimalAdapter  extends BaseAdapter {
     }
 
     public void delete (String title, String icon, String content){
-        ListViewItem item = new ListViewItem();
+        AnimalItem item = new AnimalItem();
         item.setTitle(title);
         item.setIcon(icon);
         item.setContent(content);
@@ -76,7 +76,7 @@ public class AnimalAdapter  extends BaseAdapter {
     }
 
     public void addItem(String id, String title, String icon, String content, String name){
-        ListViewItem item = new ListViewItem();
+        AnimalItem item = new AnimalItem();
 
         item.setIdStr(id);
         item.setTitle(title);

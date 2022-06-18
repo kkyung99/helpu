@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +25,6 @@ public class Community extends AppCompatActivity {
     ImageView btn_write;
     private ListView listview;
     private ListViewAdapter adapter;
-    SearchView search_view;
     public static ArrayList<ListViewItem> testList = new ArrayList<ListViewItem>();
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     BottomNavigationView bottomNavigationView;
