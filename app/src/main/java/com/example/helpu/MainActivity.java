@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -28,12 +29,14 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<ListViewItem> testList = new ArrayList<ListViewItem>();
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     BottomNavigationView bottomNavigationView;
+    GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        gridView = (GridView) findViewById(R.id.gridView)
         adapter = new AnimalAdapter(getApplicationContext());
 
         listview = (ListView) findViewById(R.id.listview);
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -126,6 +130,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
 
 }

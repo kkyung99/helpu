@@ -1,14 +1,17 @@
 package com.example.helpu;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -19,6 +22,7 @@ public class Profile extends AppCompatActivity {
     private FirebaseAuth auth;
     private TextView nameTextView;
     private TextView emailTextView;
+    private ImageView userImageView;
     Button btnSignOut;
 
     @Override
@@ -31,6 +35,8 @@ public class Profile extends AppCompatActivity {
 
         nameTextView = findViewById(R.id.userName);
         emailTextView = findViewById(R.id.userEmail);
+        userImageView = findViewById(R.id.userImage);
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -62,6 +68,9 @@ public class Profile extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         nameTextView.setText(auth.getCurrentUser().getDisplayName());
         emailTextView.setText(auth.getCurrentUser().getEmail());
+        SharedPreferences preferences = this.getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String userImageUrl = preferences.getString("userPhoto","");
+        Glide.with(this).load(userImageUrl).into(userImageView);
         btnSignOut = findViewById(R.id.btnLogout);
 
         btnSignOut.setOnClickListener(view -> {

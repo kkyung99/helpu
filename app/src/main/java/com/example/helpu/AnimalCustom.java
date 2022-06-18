@@ -175,6 +175,9 @@ public class AnimalCustom extends AppCompatActivity {
         btn_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                if(auth.getCurrentUser().getUid() == db.collection("communityAnimal").document(intent.getStringExtra("id")).get("uid"){
+//
+//                }
                 final String title = textTitle.getText().toString();
                 final String content = textContent.getText().toString();
                 final String id = intent.getStringExtra("id");

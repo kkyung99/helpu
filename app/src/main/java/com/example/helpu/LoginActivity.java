@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                 String userName = account.getDisplayName();
                 String userEmail = account.getEmail();
                 String userPhoto = account.getPhotoUrl().toString();
-//                userPhoto = userPhoto+"?type=large";
+                userPhoto = userPhoto+"?type=large";
 
                 //create sharedPreference to store user data when user signs in successfully 데이터 저장
                 SharedPreferences.Editor editor = getApplicationContext()
