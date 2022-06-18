@@ -27,19 +27,10 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        android:layout_marginTop="70dp"
-        app:iconifiedByDefault="true"
-        app:queryHint="검색어를 입력하시오." />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         android:fillViewport="true"
         android:orientation="vertical">
 
@@ -47,7 +38,11 @@
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp" />
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="80dp"
+            android:dividerHeight="10dp"
+            android:divider="#FFFFFF"
+            android:cacheColorHint="#FFFFFF"/>
     </ScrollView>
     <TextView
         android:id="@+id/receiveText"

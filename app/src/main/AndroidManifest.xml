@@ -44,6 +44,8 @@
             android:exported="false"/>
         <activity android:name=".CommentChange1"
             android:exported="false"/>
+        <activity android:name=".AnimalIn"
+            android:exported="false"/>
         <activity
             android:name=".Map"
             android:exported="false" /> <!-- android:theme="@style/Theme.HelpU"> -->

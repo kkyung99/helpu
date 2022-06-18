@@ -28,7 +28,6 @@ public class Community extends AppCompatActivity {
     ImageView btn_write;
     private ListView listview;
     private ListViewAdapter adapter;
-    SearchView search_view;
     public static ArrayList<ListViewItem> testList = new ArrayList<ListViewItem>();
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     BottomNavigationView bottomNavigationView;
@@ -42,6 +41,7 @@ public class Community extends AppCompatActivity {
         adapter = new ListViewAdapter(getApplicationContext());
 
         listview = (ListView) findViewById(R.id.listview);
+        listview.setBackgroundResource(R.drawable.shape);
         listview.setAdapter(adapter);
         testList.clear();
         db.collection("communityPosts").orderBy("timeStamp", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
