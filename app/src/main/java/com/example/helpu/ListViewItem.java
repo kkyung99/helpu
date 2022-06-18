@@ -13,7 +13,6 @@ public class ListViewItem {
     }
 
     public void setIcon(String icon) {
-
         iconDrawable = icon;
     }
 

@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -80,6 +81,7 @@ public class AnimalCustom extends AppCompatActivity {
         name.setText(intent.getStringExtra("name"));
         Glide.with(getApplicationContext()).load(intent.getStringExtra("image")).into(img);
         System.out.println(intent.getStringExtra("id"));
+
         testList.clear();
         db.collection("communityAComments").orderBy("timeStamp", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             //orderBy로 최근시간부터 나오도록 정렬
@@ -147,10 +149,16 @@ public class AnimalCustom extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
+
+        if(!intent.getStringExtra("uid").equals(auth.getCurrentUser().getUid())){
+            btn_change.setVisibility(View.GONE);
+            btn_delete.setVisibility(View.GONE);
+            return;
+        }
+
         //삭제
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,24 +183,25 @@ public class AnimalCustom extends AppCompatActivity {
         btn_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(auth.getCurrentUser().getUid() == db.collection("communityAnimal").document(intent.getStringExtra("id")).get("uid"){
-//
-//                }
-                final String title = textTitle.getText().toString();
-                final String content = textContent.getText().toString();
-                final String id = intent.getStringExtra("id");
-                final String uid = intent.getStringExtra("uid");
-                final String image = intent.getStringExtra("image");
-                String name = intent.getStringExtra("name");
-                Intent intent = new Intent(AnimalCustom.this, AnimalChange.class);
-                intent.putExtra("uid", uid);// 파이어베이스와 아이디를 구분하기위한 내가 직접 지정한 고유아이디
-                //커뮤니티에서 부터 계속 수정을 위해 uid값을 넘겨주고있다.
-                intent.putExtra("id", id); //파이어베이스에서 사용하는 고유아이디
-                intent.putExtra("title",title); //제목
-                intent.putExtra("content",content); //내용
-                intent.putExtra("image", image); //내용
-                intent.putExtra("name", name);
-                startActivity(intent);
+                Task<DocumentSnapshot> task = db.collection("communityAnimal").document(intent.getStringExtra("id")).get();
+                task.addOnSuccessListener(t-> {
+                   if(t.getData() == null || t.getData().get("uid") != auth.getCurrentUser().getUid()) return;
+                    final String title = textTitle.getText().toString();
+                    final String content = textContent.getText().toString();
+                    final String id = intent.getStringExtra("id");
+                    final String uid = intent.getStringExtra("uid");
+                    final String image = intent.getStringExtra("image");
+                    String name = intent.getStringExtra("name");
+                    Intent intent = new Intent(AnimalCustom.this, AnimalChange.class);
+                    intent.putExtra("uid", uid);// 파이어베이스와 아이디를 구분하기위한 내가 직접 지정한 고유아이디
+                    //커뮤니티에서 부터 계속 수정을 위해 uid값을 넘겨주고있다.
+                    intent.putExtra("id", id); //파이어베이스에서 사용하는 고유아이디
+                    intent.putExtra("title",title); //제목
+                    intent.putExtra("content",content); //내용
+                    intent.putExtra("image", image); //내용
+                    intent.putExtra("name", name);
+                    startActivity(intent);
+                });
             }
         });
     }

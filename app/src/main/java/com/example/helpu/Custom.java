@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,7 +30,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import java.util.Map;
 
 public class Custom extends AppCompatActivity{
@@ -146,10 +143,16 @@ public class Custom extends AppCompatActivity{
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Community.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
+
+        if(!intent.getStringExtra("uid").equals(auth.getCurrentUser().getUid())){
+            btn_change.setVisibility(View.GONE);
+            btn_delete.setVisibility(View.GONE);
+            return;
+        }
+
         //삭제
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override

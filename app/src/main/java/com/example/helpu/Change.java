@@ -77,8 +77,7 @@ public class Change extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Community.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
 

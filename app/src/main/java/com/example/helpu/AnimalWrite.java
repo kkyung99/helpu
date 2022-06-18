@@ -66,8 +66,7 @@ public class AnimalWrite extends Activity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
 
@@ -77,6 +76,35 @@ public class AnimalWrite extends Activity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(AnimalWrite.this, MainActivity.class);
+                if(photoUri == null) {
+                    String title = txt_write.getText().toString();
+                    String content = txt_write2.getText().toString();
+                    Integer image = imageView.getImageAlpha();
+
+                    Map<String, Object> post = new HashMap<>();
+                    post.put("title", title);
+                    post.put("content", content);
+                    post.put("image", "");
+                    post.put("uid", auth.getCurrentUser().getUid());
+                    post.put("name", auth.getCurrentUser().getDisplayName());
+                    post.put("timeStamp", FieldValue.serverTimestamp());
+
+                    db.collection("communityAnimal").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            //데이터가 성공적으로 추가되었을 때
+                            startActivity(intent);
+                            Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //에러가 발생했을 때
+                            Log.w(TAG, "Error ", e);
+                        }
+                    });
+                    return;
+                }
                 StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
                 ref.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -95,8 +123,8 @@ public class AnimalWrite extends Activity {
                                 post.put("title", title);
                                 post.put("content", content);
                                 post.put("image",uri.toString());
-                                post.put("name", auth.getCurrentUser().getDisplayName());
                                 post.put("uid", auth.getCurrentUser().getUid());
+                                post.put("name", auth.getCurrentUser().getDisplayName());
                                 post.put("timeStamp", FieldValue.serverTimestamp());
 
                                 db.collection("communityAnimal").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
