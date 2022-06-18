@@ -27,10 +27,39 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <LinearLayout
+        android:id="@+id/edit_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_title"
+        android:background="@color/green"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/ic_magnifying_glass_solid"
+            android:backgroundTint="@color/warm_gray" />
+
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green"
+            android:hint="검색어를 입력하세요."
+            android:inputType="text"
+            android:maxLines="1"
+            android:imeOptions="actionSearch" />
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_below="@id/edit_linear"
+        android:layout_alignParentStart="true"
         android:fillViewport="true"
         android:orientation="vertical">
 
@@ -38,22 +67,24 @@
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="80dp"
-            android:dividerHeight="10dp"
+            android:layout_marginBottom="70dp"
+            android:cacheColorHint="#FFFFFF"
             android:divider="#FFFFFF"
-            android:cacheColorHint="#FFFFFF"/>
+            android:dividerHeight="0dp" />
     </ScrollView>
+
     <TextView
         android:id="@+id/receiveText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="60dp" />
+
     <TextView
         android:id="@+id/receiveText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="100dp" />
+
     <ImageView
         android:id="@+id/button_write"
         android:layout_width="65dp"

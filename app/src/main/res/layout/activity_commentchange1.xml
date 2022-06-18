@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/warm_gray">
+    android:background="@color/light_green">
 
     <ImageView
         android:id="@+id/btn_back"
         android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/back" />
@@ -17,7 +18,7 @@
         android:layout_marginTop="40dp"
         android:layout_width="410dp"
         android:layout_height="300dp"
-        android:scrollbars = "vertical"/>
+        android:scrollbars="vertical" />
 
     <android.widget.Button
         android:id="@+id/button_change"
@@ -27,6 +28,6 @@
         android:layout_marginLeft="285dp"
         android:text="저장"
         android:textSize="15dp"
-        android:background="@drawable/button"/>
+        android:background="@drawable/button" />
 
 </LinearLayout>

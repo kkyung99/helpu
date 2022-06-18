@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
@@ -11,12 +12,14 @@
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="아이디"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
+
         <TextView
             android:id="@+id/comment"
             android:layout_width="match_parent"
@@ -26,10 +29,12 @@
             android:textSize="20dp"
             tools:layout_editor_absoluteX="76dp"
             tools:layout_editor_absoluteY="530dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/comment_change"
                 android:layout_width="50dp"
@@ -37,13 +42,13 @@
                 android:text="수정"
                 android:textSize="15dp"
                 android:layout_marginLeft="220dp"
-                android:background="@drawable/button" />
+                android:background="#00ff0000" />
 
             <Button
                 android:id="@+id/comment_delete"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/button"
+                android:background="#00ff0000"
                 android:text="삭제"
                 android:textSize="15dp"
                 android:layout_marginLeft="15dp" />

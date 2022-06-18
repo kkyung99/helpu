@@ -6,59 +6,50 @@
     android:background="#FFFFFF">
 
     <LinearLayout
+        android:id="@+id/communityLinearLayout"
         android:background="@drawable/shape"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_gravity="top"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="10dp" >
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="아이디"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
+
         <TextView
             android:id="@+id/title"
-            android:layout_width="400dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:text="제목"
-            android:textSize="15dp"
-            />
+            android:textSize="15dp" />
 
-        <LinearLayout
-            android:id="@+id/shapeLayout"
+
+        <TextView
+            android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5">
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:text="테스트입니다."
+            android:textSize="15dp"
+            android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/content"
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="120dp"
-                android:layout_marginLeft="-350dp"
-                android:scrollbars = "vertical"
-                android:gravity="top"
-                android:text="테스트입니다."
-                android:textSize="15dp"
-                android:textColor="@color/black" />
-
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginHorizontal="135dp"
-                android:src="@drawable/logo" />
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo" />
     </LinearLayout>
 </RelativeLayout>

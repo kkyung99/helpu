@@ -25,32 +25,34 @@
             android:src="@drawable/logo" />
 
     </androidx.appcompat.widget.Toolbar>
+
     <Button
+        android:layout_below="@id/header_title"
         android:id="@+id/Im_formation"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginTop="60dp"
         android:text="!유기견 입양상식 보러가기!"
         android:textSize="15dp"
-        android:textColor="@color/orange"
-        android:background="@color/green"/>
+        android:textColor="@color/black"
+        android:background="@color/warm_gray" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_below="@id/Im_formation"
         android:fillViewport="true"
         android:orientation="vertical">
+
         <ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
-            android:layout_marginBottom="80dp"
-            android:dividerHeight="10dp"
+            android:dividerHeight="0dp"
             android:divider="#FFFFFF"
-            android:cacheColorHint="#FFFFFF"/>
+            android:cacheColorHint="#FFFFFF"
+            android:layout_marginBottom="70dp" />
     </ScrollView>
+
     <ImageView
         android:id="@+id/button_write"
         android:layout_width="65dp"
@@ -58,7 +60,7 @@
         android:layout_marginTop="570dp"
         android:layout_marginLeft="300dp"
         android:background="@drawable/ic_circle_plus_solid"
-        android:backgroundTint="@color/dark_yellow"/>
+        android:backgroundTint="@color/dark_yellow" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigator"

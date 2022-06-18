@@ -2,15 +2,18 @@ package com.example.helpu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.helpu.service.SearchCommunityService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,12 +31,21 @@ public class Community extends AppCompatActivity {
     public static ArrayList<ListViewItem> testList = new ArrayList<ListViewItem>();
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     BottomNavigationView bottomNavigationView;
+    private static final SearchCommunityService searchCommunityService = new SearchCommunityService();
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community);
-
+        editText = findViewById(R.id.edit_search);
+        editText.setOnKeyListener((v, k, e) -> {
+            if (e.getAction() == KeyEvent.ACTION_DOWN && k == KeyEvent.KEYCODE_ENTER) {
+                searchCommunityService.searchCommunity(editText.getText().toString(), testList, adapter);
+                return true;
+            }
+            return false;
+        });
 
         adapter = new ListViewAdapter(getApplicationContext());
 
@@ -52,7 +64,6 @@ public class Community extends AppCompatActivity {
                         System.out.println(document.getData());
                         //doucument 결과를 어뎁터에 저장
                         adapter.addItem(document.getId(), document.get("title").toString(), document.get("image").toString(), document.get("content").toString(), document.get("name").toString());
-                        adapter.notifyDataSetChanged();
                         ListViewItem listviewData = new ListViewItem(); //listviewData객체 생성
                         listviewData.setUidStr(document.get("uid").toString()); //수정페이지에서 uid값을 사용하기 위해
                         listviewData.setIdStr(document.getId()); //고정id값 저장
@@ -63,9 +74,7 @@ public class Community extends AppCompatActivity {
                         testList.add(listviewData);//listviewData를 testlist배열안에 저장해준다. 그럼 쭈루룩 나옴.
                         //데이터를 가져올 수 있다.
                     }
-                    //그렇지 않을때
-                } else {
-
+                    adapter.notifyDataSetChanged();
                 }
             }
         });
@@ -80,14 +89,14 @@ public class Community extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
 
                     case R.id.map:
-                        startActivity(new Intent(getApplicationContext(),Map.class));
+                        startActivity(new Intent(getApplicationContext(), Map.class));
                         overridePendingTransition(0, 0);
                         return true;
 
@@ -95,7 +104,7 @@ public class Community extends AppCompatActivity {
                         return true;
 
                     case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(),Profile.class));
+                        startActivity(new Intent(getApplicationContext(), Profile.class));
                         overridePendingTransition(0, 0);
                         return true;
                 }
@@ -114,7 +123,8 @@ public class Community extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {;
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ;
                 Intent intent =
                         new Intent(getApplicationContext(), Custom.class);
                 intent.putExtra("uid", testList.get(position).getUidStr()); //수정할때 고정id값이 변하지 않게 하기위해 uid사용

@@ -5,115 +5,134 @@
 
     <ImageView
         android:id="@+id/btn_back"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/back" />
 
-    <LinearLayout
+    <ScrollView
+        android:layout_below="@+id/btn_back"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="20sp"
-        android:layout_marginTop="70sp"
-        android:layout_marginEnd="20sp"
-        android:layout_marginBottom="20sp"
-        android:layout_weight="0.6"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:fillViewport="true"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="아이디"
-            android:textSize="20dp"/>
-
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="350dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:scrollbars="vertical"
-            android:text="제목"
-            android:textSize="10pt" />
-
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="250dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:src="@drawable/logo" />
-
-        <TextView
-            android:id="@+id/txtContent"
-            android:layout_width="350dp"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:scrollbars="vertical"
-            android:text="내용"
-            android:textSize="10pt" />
-
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="285dp"
-            android:background="@drawable/button"
-            android:text="삭제" />
-
-        <Button
-            android:id="@+id/change"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="205dp"
-            android:layout_marginTop="-50dp"
-            android:background="@drawable/button"
-            android:text="수정" />
 
         <LinearLayout
+            android:layout_below="@+id/btn_back"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ListView
-                android:id="@+id/listview1"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginBottom="10dp" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="20sp"
+            android:layout_marginBottom="20sp"
+            android:layout_weight="0.6"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="댓글"
-                android:textColor="@color/orange"
+                android:text="아이디"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:scrollbars="vertical"
+                android:text="제목"
                 android:textSize="10pt" />
 
-            <EditText
-                android:id="@+id/txtContent1"
-                android:layout_width="230dp"
+            <TextView
+                android:id="@+id/txtContent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="50dp"
-                android:gravity="center"
-                android:hint="댓글을 작성해주세요."
-                android:textSize="7pt" />
+                android:layout_marginTop="20dp"
+                android:scrollbars="vertical"
+                android:text="내용"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/logo" />
 
             <Button
-                android:id="@+id/upload"
+                android:id="@+id/delete"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
                 android:layout_marginLeft="285dp"
-                android:background="@drawable/button"
-                android:text="등록"
-                android:textSize="7pt" />
+                android:background="#00ff0000"
+                android:text="삭제" />
 
-        </RelativeLayout>
-    </LinearLayout>
+            <Button
+                android:id="@+id/change"
+                android:layout_below="@+id/img"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="205dp"
+                android:layout_marginTop="-50dp"
+                android:background="#00ff0000"
+                android:text="수정" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ListView
+                    android:id="@+id/listview1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="댓글"
+                    android:textColor="@color/orange"
+                    android:textSize="10pt" />
+
+                <EditText
+                    android:id="@+id/txtContent1"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="50dp"
+                    android:hint="댓글을 작성해주세요."
+                    android:textSize="7pt" />
+
+                <Button
+                    android:id="@+id/upload"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="285dp"
+                    android:background="@drawable/button"
+                    android:text="등록"
+                    android:textSize="7pt" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

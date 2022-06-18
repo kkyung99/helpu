@@ -7,6 +7,7 @@
     <ImageView
         android:id="@+id/btn_back"
         android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/back" />
@@ -14,18 +15,18 @@
     <EditText
         android:id="@+id/comment_change"
         android:layout_marginTop="40dp"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:scrollbars = "vertical"/>
+        android:scrollbars="vertical" />
 
-        <android.widget.Button
-            android:id="@+id/button_change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            android:layout_marginLeft="285dp"
-            android:text="저장"
-            android:textSize="15dp"
-            android:background="@drawable/button"/>
+    <android.widget.Button
+        android:id="@+id/button_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="285dp"
+        android:text="저장"
+        android:textSize="15dp"
+        android:background="@drawable/button" />
 
 </LinearLayout>

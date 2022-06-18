@@ -3,60 +3,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="#FFFFFF" >
+    android:background="#FFFFFF">
 
     <LinearLayout
+        android:id="@+id/animalLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_gravity="top"
+        android:gravity="center"
         android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/shape1"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="아이디"
-            android:textSize="20dp"/>//여기에 작성자아이디가 들어가게
+            android:textSize="20dp" />//여기에 작성자아이디가 들어가게
+
         <TextView
             android:id="@+id/title"
-            android:layout_width="400dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="강아지를 찾습니다."
             android:textSize="15dp" />
 
-        <LinearLayout
-            android:id="@+id/shapeLayout"
+        <TextView
+            android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5">
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:gravity="top"
+            android:textColor="@color/black"
+            android:text="강쥐"
+            android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/content"
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="110dp"
-                android:layout_marginLeft="-350dp"
-                android:scrollbars = "vertical"
-                android:gravity="top"
-                android:textColor="@color/black"
-                android:text="강쥐"
-                android:textSize="15dp" />
-
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginHorizontal="135dp"
-                android:src="@drawable/logo" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo" />
     </LinearLayout>
 </RelativeLayout>

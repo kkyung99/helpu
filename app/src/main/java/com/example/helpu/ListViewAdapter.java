@@ -1,10 +1,6 @@
 package com.example.helpu;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,50 +10,52 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
-public class ListViewAdapter extends BaseAdapter{
+public class ListViewAdapter extends BaseAdapter {
     private ImageView iconImageView;
     private TextView titleTextView;
     private TextView contentTextView;
     private TextView nameTextView;
-    private ArrayList<ListViewItem>listViewItemList=new ArrayList<ListViewItem>();
+    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>();
     Context context;
-    public  ListViewAdapter(Context context){
+
+    public ListViewAdapter(Context context) {
         this.context = context;
     }
+
     @Override
-    public  int getCount(){
+    public int getCount() {
         return listViewItemList.size();
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
-        final  int pos = position;
+    public View getView(int position, View convertView, ViewGroup parent) {
+        final int pos = position;
         final Context context = parent.getContext();
 
-        if(convertView == null){
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.listview_item,parent,false);
+            convertView = inflater.inflate(R.layout.listview_item, parent, false);
         }
         titleTextView = (TextView) convertView.findViewById(R.id.title);
         iconImageView = (ImageView) convertView.findViewById(R.id.icon);
-        contentTextView =(TextView) convertView.findViewById(R.id.content);
-        nameTextView =(TextView) convertView.findViewById(R.id.name);
+        contentTextView = (TextView) convertView.findViewById(R.id.content);
+        nameTextView = (TextView) convertView.findViewById(R.id.name);
         ListViewItem listViewItem = listViewItemList.get(position);
 
         titleTextView.setText(listViewItem.getTitle());
-        Glide.with(context).load(listViewItem.getIcon()).into(iconImageView);
         contentTextView.setText(listViewItem.getContent());
         nameTextView.setText(listViewItem.getNameStr());
 
+        if (!"".equals(listViewItem.getIcon())) {
+            Glide.with(context).load(listViewItem.getIcon()).into(iconImageView);
+        } else {
+            iconImageView.setVisibility(View.GONE);
+        }
+
         return convertView;
+
     }
 
     @Override
@@ -71,7 +69,7 @@ public class ListViewAdapter extends BaseAdapter{
         return listViewItemList.get(position);
     }
 
-    public void delete (String title, String icon, String content){
+    public void delete(String title, String icon, String content) {
         ListViewItem item = new ListViewItem();
         item.setTitle(title);
         item.setIcon(icon);
@@ -80,7 +78,7 @@ public class ListViewAdapter extends BaseAdapter{
         notifyDataSetChanged();
     }
 
-    public void addItem(String id, String title, String icon, String content, String name){
+    public void addItem(String id, String title, String icon, String content, String name) {
         ListViewItem item = new ListViewItem();
 
         item.setIdStr(id);
@@ -90,5 +88,9 @@ public class ListViewAdapter extends BaseAdapter{
         item.setNameStr(name);
 
         listViewItemList.add(item);
+    }
+
+    public void clear() {
+        listViewItemList.clear();
     }
 }
