@@ -363,6 +363,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Activi
                 //.setTypeFilter(TypeFilter.ESTABLISHMENT)
                 .setSessionToken(token)
                 .setQuery("유기견")
+                .setQuery("동물병원")
                 .build();
 
         mPlacesClient.findAutocompletePredictions(request).addOnSuccessListener(this, (response) -> {
