@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#FFFFFF">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/header_title"
@@ -57,9 +58,11 @@
         android:id="@+id/button_write"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginTop="570dp"
-        android:layout_marginLeft="300dp"
+        android:layout_marginBottom="85dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="25dp"
         android:background="@drawable/ic_circle_plus_solid"
+        android:layout_alignParentBottom="true"
         android:backgroundTint="@color/dark_yellow" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

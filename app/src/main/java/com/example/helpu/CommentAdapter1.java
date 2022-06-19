@@ -23,7 +23,7 @@ public class CommentAdapter1 extends BaseAdapter {
     Button comment_change;
     Button comment_delete;
     TextView name;
-    ArrayList<CommentItem> CommentItemList=new ArrayList<CommentItem>();
+    ArrayList<CommentItem> CommentItemList = new ArrayList<CommentItem>();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Context context;
     private String title;
@@ -31,38 +31,40 @@ public class CommentAdapter1 extends BaseAdapter {
     private String image;
     private String postId;
     private String authorName;
+    private String postAuthorUid;
     final FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    public  CommentAdapter1(Context context, String title, String content, String image, String postId, String authorName){
+    public CommentAdapter1(Context context, String title, String content, String image, String postId, String authorName, String postAuthorUid) {
         this.context = context;
         this.title = title;
         this.content = content;
         this.image = image;
         this.postId = postId;
         this.authorName = authorName;
+        this.postAuthorUid = postAuthorUid;
     }
+
     @Override
-    public  int getCount(){
+    public int getCount() {
         return CommentItemList.size();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final  int pos = position;
+        final int pos = position;
         final Context context = parent.getContext();
-        if(convertView == null){
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.comment_item1,parent,false);
+            convertView = inflater.inflate(R.layout.comment_item1, parent, false);
         }
         comment = (TextView) convertView.findViewById(R.id.comment);
         name = convertView.findViewById(R.id.name);
         comment_change = (Button) convertView.findViewById(R.id.comment_change);
         comment_delete = (Button) convertView.findViewById(R.id.comment_delete);
-        if(!CommentItemList.get(pos).getAuthorUid().equals(auth.getCurrentUser().getUid())){
+        if (!CommentItemList.get(pos).getAuthorUid().equals(auth.getCurrentUser().getUid())) {
             comment_change.setVisibility(View.GONE);
             comment_delete.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             comment_change.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -70,13 +72,14 @@ public class CommentAdapter1 extends BaseAdapter {
                     intent.putExtra("authorUid", CommentItemList.get(pos).getAuthorUid());// 파이어베이스와 아이디를 구분하기위한 내가 직접 지정한 고유아이디
                     //커뮤니티에서 부터 계속 수정을 위해 uid값을 넘겨주고있다.
                     intent.putExtra("authorName", CommentItemList.get(pos).getAuthorName()); //파이어베이스에서 사용하는 고유아이디
-                    intent.putExtra("comment",CommentItemList.get(pos).getComment()); //제목
-                    intent.putExtra("id",CommentItemList.get(pos).getId()); //제목
+                    intent.putExtra("comment", CommentItemList.get(pos).getComment()); //제목
+                    intent.putExtra("id", CommentItemList.get(pos).getId()); //제목
                     intent.putExtra("postId", postId);
                     intent.putExtra("title", title);
                     intent.putExtra("content", content);
                     intent.putExtra("image", image);
                     intent.putExtra("postAuthorName", authorName);
+                    intent.putExtra("postAuthorUid", postAuthorUid);
                     context.startActivity(intent);
                 }
             });
@@ -95,6 +98,7 @@ public class CommentAdapter1 extends BaseAdapter {
                                 intent.putExtra("image", image);
                                 intent.putExtra("id", postId);
                                 intent.putExtra("name", authorName);
+                                intent.putExtra("uid", postAuthorUid);
                                 context.startActivity(intent);
                             }
                         }
@@ -102,23 +106,25 @@ public class CommentAdapter1 extends BaseAdapter {
                 }
             });
         }
-        
+
         comment.setText(CommentItemList.get(pos).getComment());//commentxml에 있는 comment를 여기에 받아온걸 입혀주겠다.
         name.setText(CommentItemList.get(pos).getAuthorName());
         return convertView;
     }
+
     @Override
     public long getItemId(int position) {
         return position;
     }
+
     @Override
     public Object getItem(int position) {
 
         return CommentItemList.get(position);
     }
 
-    public void addItem(String comment, String authorName, String authorUid, String id){
-        CommentItem item = new CommentItem(comment,authorName,authorUid, id);
+    public void addItem(String comment, String authorName, String authorUid, String id) {
+        CommentItem item = new CommentItem(comment, authorName, authorUid, id);
         CommentItemList.add(item);
     }
 }

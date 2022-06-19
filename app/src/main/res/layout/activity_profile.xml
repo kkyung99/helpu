@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile">
+    tools:context=".Profile"
+    android:background="#FFFFFF">
 
-    <include layout="@layout/activity_base"/>
+    <include layout="@layout/activity_base" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigator"
@@ -22,6 +23,7 @@
         android:id="@+id/userImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="150dp"
         android:layout_centerHorizontal="true"
         tools:srcCompat="@tools:sample/avatars" />
@@ -31,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtProfile"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="300dp"
         android:padding="15dp"
         android:textColor="@color/black"
@@ -42,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtProfile"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="370dp"
         android:padding="15dp"
@@ -56,8 +60,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="175dp"
         android:text="로그아웃"
-        android:textAllCaps="false"
-        />
+        android:textAllCaps="false" />
 
 
 </RelativeLayout>

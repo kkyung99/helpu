@@ -39,12 +39,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         btn = findViewById(R.id.google_btn);
-        mAuth = FirebaseAuth.getInstance(); //객체 초기화
+        mAuth = FirebaseAuth.getInstance();
         requestGoogleSignIn();
 
-        btn.setOnClickListener(new View.OnClickListener(){
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 signIn();
             }
         });
@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
 
-        // 내 앱에서 구글의 계정을 가져다 쓸거니 알고 있어라!
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
@@ -113,11 +112,11 @@ public class LoginActivity extends AppCompatActivity {
                 String userName = account.getDisplayName();
                 String userEmail = account.getEmail();
                 String userPhoto = account.getPhotoUrl().toString();
-                userPhoto = userPhoto+"?type=large";
+                userPhoto = userPhoto + "?type=large";
 
                 //create sharedPreference to store user data when user signs in successfully 데이터 저장
                 SharedPreferences.Editor editor = getApplicationContext()
-                        .getSharedPreferences("MyPrefs",MODE_PRIVATE)
+                        .getSharedPreferences("MyPrefs", MODE_PRIVATE)
                         .edit();
                 editor.putString("username", userName);
                 editor.putString("useremail", userEmail);
@@ -136,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null){
+        if (user != null) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
     }

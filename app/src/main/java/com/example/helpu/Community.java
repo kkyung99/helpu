@@ -124,7 +124,6 @@ public class Community extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ;
                 Intent intent =
                         new Intent(getApplicationContext(), Custom.class);
                 intent.putExtra("uid", testList.get(position).getUidStr()); //수정할때 고정id값이 변하지 않게 하기위해 uid사용

@@ -63,12 +63,14 @@ public class CommentChange1 extends AppCompatActivity {
                             String image = intent.getStringExtra("image");
                             String authorName = intent.getStringExtra("postAuthorName");
                             String id = intent.getStringExtra("postId");
+                            String postAuthorUid = intent.getStringExtra("postAuthorUid");
                             Intent intent = new Intent(CommentChange1.this, AnimalCustom.class);
                             intent.putExtra("title", title);
                             intent.putExtra("content", content);
                             intent.putExtra("image", image);
                             intent.putExtra("name", authorName);
                             intent.putExtra("id", id);
+                            intent.putExtra("uid", postAuthorUid);
                             startActivity(intent);
                         }
                     }

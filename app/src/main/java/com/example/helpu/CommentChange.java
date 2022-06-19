@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommentChange extends AppCompatActivity{
+public class CommentChange extends AppCompatActivity {
     Button btn_change;//저장
     ImageView btn_back;
     EditText edit_change;
@@ -64,12 +64,14 @@ public class CommentChange extends AppCompatActivity{
                             String image = intent.getStringExtra("image");
                             String authorName = intent.getStringExtra("postAuthorName");
                             String id = intent.getStringExtra("postId");
+                            String postAuthorUid = intent.getStringExtra("postAuthorUid");
                             Intent intent = new Intent(CommentChange.this, Custom.class);
                             intent.putExtra("title", title);
                             intent.putExtra("content", content);
                             intent.putExtra("image", image);
                             intent.putExtra("name", authorName);
                             intent.putExtra("id", id);
+                            intent.putExtra("uid", postAuthorUid);
                             startActivity(intent);
                         }
                     }

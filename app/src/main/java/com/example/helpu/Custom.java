@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Custom extends AppCompatActivity{
+public class Custom extends AppCompatActivity {
     Button btn_delete;//삭제
     Button btn_change;//수정
     Button btn_upload;//댓글등록
@@ -50,6 +50,7 @@ public class Custom extends AppCompatActivity{
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ListView listview;
     public static ArrayList<ListViewItem> testList = new ArrayList<ListViewItem>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +72,9 @@ public class Custom extends AppCompatActivity{
 
         //보내온 intent를 얻는다.
         Intent intent = getIntent();
-        adapter = new CommentAdapter(getApplicationContext(), intent.getStringExtra("title"), intent.getStringExtra("content"), intent.getStringExtra("image"), intent.getStringExtra("id"), intent.getStringExtra("name"));
+        adapter = new CommentAdapter(getApplicationContext(), intent.getStringExtra("title"),
+                intent.getStringExtra("content"), intent.getStringExtra("image"),
+                intent.getStringExtra("id"), intent.getStringExtra("name"), intent.getStringExtra("uid"));
         listView1.setAdapter(adapter);
         textTitle.setText(intent.getStringExtra("title"));
         textContent.setText(intent.getStringExtra("content"));
@@ -108,7 +111,7 @@ public class Custom extends AppCompatActivity{
         //댓글등록
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
-            public  void onClick(View v) {
+            public void onClick(View v) {
                 String comment1 = comment.getText().toString();
                 if (comment1.length() == 0) {
                     comment.setText("댓글을 입력하세요.");
@@ -147,7 +150,7 @@ public class Custom extends AppCompatActivity{
             }
         });
 
-        if(!intent.getStringExtra("uid").equals(auth.getCurrentUser().getUid())){
+        if (!intent.getStringExtra("uid").equals(auth.getCurrentUser().getUid())) {
             btn_change.setVisibility(View.GONE);
             btn_delete.setVisibility(View.GONE);
             return;
@@ -186,8 +189,8 @@ public class Custom extends AppCompatActivity{
                 intent.putExtra("uid", uid);// 파이어베이스와 아이디를 구분하기위한 내가 직접 지정한 고유아이디
                 //커뮤니티에서 부터 계속 수정을 위해 uid값을 넘겨주고있다.
                 intent.putExtra("id", id); //파이어베이스에서 사용하는 고유아이디
-                intent.putExtra("title",title); //제목
-                intent.putExtra("content",content); //내용
+                intent.putExtra("title", title); //제목
+                intent.putExtra("content", content); //내용
                 intent.putExtra("image", image); //내용
                 intent.putExtra("name", name);
                 startActivity(intent);

@@ -51,6 +51,7 @@ public class AnimalCustom extends AppCompatActivity {
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ListView listview;
     public static ArrayList<ListViewItem> testList = new ArrayList<ListViewItem>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +75,9 @@ public class AnimalCustom extends AppCompatActivity {
         //보내온 intent를 얻는다.
         Intent intent = getIntent();
 
-        adapter = new CommentAdapter1(getApplicationContext(), intent.getStringExtra("title"), intent.getStringExtra("content"), intent.getStringExtra("image"), intent.getStringExtra("id"), intent.getStringExtra("name"));
+        adapter = new CommentAdapter1(getApplicationContext(), intent.getStringExtra("title"),
+                intent.getStringExtra("content"), intent.getStringExtra("image"),
+                intent.getStringExtra("id"), intent.getStringExtra("name"), intent.getStringExtra("uid"));
         listView1.setAdapter(adapter);
         textTitle.setText(intent.getStringExtra("title"));
         textContent.setText(intent.getStringExtra("content"));
@@ -112,7 +115,7 @@ public class AnimalCustom extends AppCompatActivity {
         //댓글등록
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
-            public  void onClick(View v) {
+            public void onClick(View v) {
                 String comment1 = comment.getText().toString();
                 if (comment1.length() == 0) {
                     comment.setText("댓글을 입력하세요.");
@@ -153,7 +156,7 @@ public class AnimalCustom extends AppCompatActivity {
             }
         });
 
-        if(!intent.getStringExtra("uid").equals(auth.getCurrentUser().getUid())){
+        if (!intent.getStringExtra("uid").equals(auth.getCurrentUser().getUid())) {
             btn_change.setVisibility(View.GONE);
             btn_delete.setVisibility(View.GONE);
             return;
@@ -163,19 +166,19 @@ public class AnimalCustom extends AppCompatActivity {
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    System.out.println("intent.getStringExtra(id)");
-                    System.out.println(intent.getStringExtra("id"));
-                    db.collection("communityAnimal").document(intent.getStringExtra("id")).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        //고유값id으로 document를 가져온것 .이전까지 / delete는 가져온걸 삭제하겠다./add~ (파이어베이스에서 고유값이 다다른것을 알 수 있다.)
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                //작업이 성공하면 넘겨줘서 삭제되서 다시 리스트를 불러왔을때 없어진것을 볼수있음.
-                                Intent intent = new Intent(AnimalCustom.this, MainActivity.class);
-                                startActivity(intent);
-                            }
+                System.out.println("intent.getStringExtra(id)");
+                System.out.println(intent.getStringExtra("id"));
+                db.collection("communityAnimal").document(intent.getStringExtra("id")).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    //고유값id으로 document를 가져온것 .이전까지 / delete는 가져온걸 삭제하겠다./add~ (파이어베이스에서 고유값이 다다른것을 알 수 있다.)
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            //작업이 성공하면 넘겨줘서 삭제되서 다시 리스트를 불러왔을때 없어진것을 볼수있음.
+                            Intent intent = new Intent(AnimalCustom.this, MainActivity.class);
+                            startActivity(intent);
                         }
-                    });
+                    }
+                });
             }
         });
         //수정
@@ -183,8 +186,9 @@ public class AnimalCustom extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Task<DocumentSnapshot> task = db.collection("communityAnimal").document(intent.getStringExtra("id")).get();
-                task.addOnSuccessListener(t-> {
-                   if(t.getData() == null || t.getData().get("uid") != auth.getCurrentUser().getUid()) return;
+                task.addOnSuccessListener(t -> {
+                    if (t.getData() == null || t.getData().get("uid") != auth.getCurrentUser().getUid())
+                        return;
                     final String title = textTitle.getText().toString();
                     final String content = textContent.getText().toString();
                     final String id = intent.getStringExtra("id");
@@ -195,8 +199,8 @@ public class AnimalCustom extends AppCompatActivity {
                     intent.putExtra("uid", uid);// 파이어베이스와 아이디를 구분하기위한 내가 직접 지정한 고유아이디
                     //커뮤니티에서 부터 계속 수정을 위해 uid값을 넘겨주고있다.
                     intent.putExtra("id", id); //파이어베이스에서 사용하는 고유아이디
-                    intent.putExtra("title",title); //제목
-                    intent.putExtra("content",content); //내용
+                    intent.putExtra("title", title); //제목
+                    intent.putExtra("content", content); //내용
                     intent.putExtra("image", image); //내용
                     intent.putExtra("name", name);
                     startActivity(intent);
