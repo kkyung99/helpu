@@ -182,9 +182,9 @@ public class AnimalCustom extends AppCompatActivity {
         btn_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Task<DocumentSnapshot> task = db.collection("communityAnimal").document(intent.getStringExtra("id")).get();
-                task.addOnSuccessListener(t-> {
-                   if(t.getData() == null || t.getData().get("uid") != auth.getCurrentUser().getUid()) return;
+//                Task<DocumentSnapshot> task = db.collection("communityAnimal").document(intent.getStringExtra("id")).get();
+//                task.addOnSuccessListener(t-> {
+//                   if(t.getData() == null || t.getData().get("uid") != auth.getCurrentUser().getUid()) return;
                     final String title = textTitle.getText().toString();
                     final String content = textContent.getText().toString();
                     final String id = intent.getStringExtra("id");
@@ -200,8 +200,8 @@ public class AnimalCustom extends AppCompatActivity {
                     intent.putExtra("image", image); //이미지
                     intent.putExtra("name", name);
                     startActivity(intent);
-                });
-           }
+                //});
+          }
         });
     }
 }

@@ -89,7 +89,7 @@
         android:id="@+id/button_write"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginTop="570dp"
+        android:layout_marginTop="660dp"
         android:layout_marginLeft="300dp"
         android:background="@drawable/ic_circle_plus_solid"
         android:backgroundTint="@color/dark_yellow" />

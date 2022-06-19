@@ -66,7 +66,7 @@ public class CommentAdapter extends BaseAdapter {
             comment_change.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, CommentChange1.class);
+                    Intent intent = new Intent(context, CommentChange.class);
                     intent.putExtra("authorUid", CommentItemList.get(pos).getAuthorUid());// 파이어베이스와 아이디를 구분하기위한 내가 직접 지정한 고유아이디
                     //커뮤니티에서 부터 계속 수정을 위해 uid값을 넘겨주고있다.
                     intent.putExtra("authorName", CommentItemList.get(pos).getAuthorName()); //파이어베이스에서 사용하는 고유아이디
@@ -83,7 +83,7 @@ public class CommentAdapter extends BaseAdapter {
             comment_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    db.collection("communityAComments").document(CommentItemList.get(pos).getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    db.collection("communityComments").document(CommentItemList.get(pos).getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                         //고유값id으로 document를 가져온것 .이전까지 / delete는 가져온걸 삭제하겠다./add~ (파이어베이스에서 고유값이 다다른것을 알 수 있다.)
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

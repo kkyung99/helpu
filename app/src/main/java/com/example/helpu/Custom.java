@@ -176,13 +176,13 @@ public class Custom extends AppCompatActivity{
         btn_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(Custom.this, Change.class);
                 final String title = textTitle.getText().toString();
                 final String content = textContent.getText().toString();
                 final String id = intent.getStringExtra("id");
                 final String uid = intent.getStringExtra("uid");
                 final String image = intent.getStringExtra("image");
                 String name = intent.getStringExtra("name");
-                Intent intent = new Intent(Custom.this, Change.class);
                 intent.putExtra("uid", uid);// 파이어베이스와 아이디를 구분하기위한 내가 직접 지정한 고유아이디
                 //커뮤니티에서 부터 계속 수정을 위해 uid값을 넘겨주고있다.
                 intent.putExtra("id", id); //파이어베이스에서 사용하는 고유아이디
