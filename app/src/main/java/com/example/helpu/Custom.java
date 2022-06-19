@@ -82,7 +82,7 @@ public class Custom extends AppCompatActivity {
         Glide.with(getApplicationContext()).load(intent.getStringExtra("image")).into(img);
 
         testList.clear();
-        db.collection("communityComments").orderBy("timeStamp", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("communityComments").orderBy("timeStamp", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             //orderBy로 최근시간부터 나오도록 정렬
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -146,7 +146,8 @@ public class Custom extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent(getApplicationContext(), Community.class);
+                startActivity(intent);
             }
         });
 

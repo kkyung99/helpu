@@ -86,7 +86,7 @@ public class AnimalCustom extends AppCompatActivity {
         System.out.println(intent.getStringExtra("id"));
 
         testList.clear();
-        db.collection("communityAComments").orderBy("timeStamp", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("communityAComments").orderBy("timeStamp", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             //orderBy로 최근시간부터 나오도록 정렬
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -152,7 +152,8 @@ public class AnimalCustom extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
