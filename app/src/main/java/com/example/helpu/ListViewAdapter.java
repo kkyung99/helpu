@@ -17,7 +17,8 @@ public class ListViewAdapter extends BaseAdapter {
     private TextView titleTextView;
     private TextView contentTextView;
     private TextView nameTextView;
-    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>();
+    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>();//아이템을 배열로서 저장
+    //context란 안드로이드 앱 흐름을 담당하는 것으로 화면 인텐트를 넘기거나 엑티비티,프레그먼트를 넘길 때 필요하다.
     Context context;
 
     public ListViewAdapter(Context context) {

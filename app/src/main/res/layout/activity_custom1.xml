@@ -96,19 +96,19 @@
                 <ListView
                     android:id="@+id/listview1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="400dp"
                     android:layout_marginBottom="10dp" />
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
+                android:layout_marginBottom="20dp"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     android:text="댓글"
                     android:textColor="@color/orange"
                     android:textSize="10pt" />
@@ -117,7 +117,6 @@
                     android:id="@+id/txtContent1"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginLeft="50dp"
                     android:hint="댓글을 작성해주세요."
                     android:textSize="7pt" />
@@ -126,7 +125,6 @@
                     android:id="@+id/upload"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginLeft="285dp"
                     android:background="@drawable/button"
                     android:text="등록"

@@ -49,12 +49,14 @@ public class CommentChange extends AppCompatActivity {
         btn_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //HashMap을 사용하여 post에 값을 저장하였다.
                 Map<String, Object> post = new HashMap<>();
                 post.put("comment", edit_change.getText().toString());
                 post.put("postId", intent.getStringExtra("postId"));
                 post.put("authorName", intent.getStringExtra("authorName"));
                 post.put("authorUid", intent.getStringExtra("authorUid"));
                 post.put("timeStamp", FieldValue.serverTimestamp());
+                //저장한 값을 컬렉션에 저장한다.
                 db.collection("communityComments").document(intent.getStringExtra("id")).set(post).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
