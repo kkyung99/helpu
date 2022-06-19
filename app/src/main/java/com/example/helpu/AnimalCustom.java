@@ -201,7 +201,7 @@ public class AnimalCustom extends AppCompatActivity {
                     intent.putExtra("name", name);
                     startActivity(intent);
                 });
-            }
+           }
         });
     }
 }
