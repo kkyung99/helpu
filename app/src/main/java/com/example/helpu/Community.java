@@ -32,7 +32,7 @@ public class Community extends AppCompatActivity {
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     BottomNavigationView bottomNavigationView;
     private static final SearchCommunityService searchCommunityService = new SearchCommunityService();
-    private EditText editText;
+    private EditText editText; //검색
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +132,7 @@ public class Community extends AppCompatActivity {
                 intent.putExtra("title", testList.get(position).getTitle());//제목
                 intent.putExtra("content", testList.get(position).getContent());//내용
                 intent.putExtra("image", testList.get(position).getIcon());//이미지
-                intent.putExtra("name", testList.get(position).getNameStr());
+                intent.putExtra("name", testList.get(position).getNameStr()); //사용자아이디이름
                 startActivity(intent);
             }
         });

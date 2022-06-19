@@ -70,8 +70,8 @@ public class CommentAdapter1 extends BaseAdapter {
                     intent.putExtra("authorUid", CommentItemList.get(pos).getAuthorUid());// 파이어베이스와 아이디를 구분하기위한 내가 직접 지정한 고유아이디
                     //커뮤니티에서 부터 계속 수정을 위해 uid값을 넘겨주고있다.
                     intent.putExtra("authorName", CommentItemList.get(pos).getAuthorName()); //파이어베이스에서 사용하는 고유아이디
-                    intent.putExtra("comment",CommentItemList.get(pos).getComment()); //제목
-                    intent.putExtra("id",CommentItemList.get(pos).getId()); //제목
+                    intent.putExtra("comment",CommentItemList.get(pos).getComment()); //댓글
+                    intent.putExtra("id",CommentItemList.get(pos).getId());
                     intent.putExtra("postId", postId);
                     intent.putExtra("title", title);
                     intent.putExtra("content", content);

@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("title", testList.get(position).getTitle());//제목
                 intent.putExtra("content", testList.get(position).getContent());//내용
                 intent.putExtra("image", testList.get(position).getIcon());//이미지
-                intent.putExtra("name", testList.get(position).getNameStr());//이미지
+                intent.putExtra("name", testList.get(position).getNameStr());//사용자아이디이름
                 startActivity(intent);
             }
         });

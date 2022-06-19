@@ -42,6 +42,10 @@ public class Write extends Activity {
     EditText txt_write2;//본문
     ImageView imageView;
     public static final int REQUEST_CODE = 1000;
+    /*startActivityForResult(intent, REQUEST_CODE);을 사용 할 때
+    내가 누른 값이 무엇인지 구별하기 위해 REQUEST_CODE 값을 설정해주고
+    누른 값이 onActivityResult에서 일치하면 누른 값을 구분하기 위해서 사용한다.
+    (구분을 해서 여기서는 이미지를 띄울 수 있도록 사용할 수 있게 되는 것이다.)*/
     final FirebaseAuth auth = FirebaseAuth.getInstance();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage;

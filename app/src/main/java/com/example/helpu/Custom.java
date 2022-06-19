@@ -188,7 +188,7 @@ public class Custom extends AppCompatActivity{
                 intent.putExtra("id", id); //파이어베이스에서 사용하는 고유아이디
                 intent.putExtra("title",title); //제목
                 intent.putExtra("content",content); //내용
-                intent.putExtra("image", image); //내용
+                intent.putExtra("image", image); //이미지
                 intent.putExtra("name", name);
                 startActivity(intent);
             }
